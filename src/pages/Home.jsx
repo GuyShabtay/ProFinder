@@ -12,7 +12,6 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
-
   useEffect(() => {
     setLoading(true);
     axios
@@ -44,7 +43,7 @@ const Home = () => {
         </button>
       </div>
       <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Books List</h1>
+        <h1 className='text-3xl my-8'>Professionals List</h1>
         <Link to='/books/create'>
           <MdOutlineAddBox className='text-sky-800 text-4xl' />
         </Link>
