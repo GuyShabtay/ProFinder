@@ -44,7 +44,7 @@ const ShowBook = () => {
             <span>{book.profession}</span>
           </div>
           <div className='my-4'>
-            <span className='text-xl mr-4 text-gray-500'>Publish Year</span>
+            <span className='text-xl mr-4 text-gray-500'>Location</span>
             <span>{book.location}</span>
           </div>
           <div className='my-4'>

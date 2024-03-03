@@ -60,9 +60,9 @@ const CreateBooks = () => {
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Publish Year</label>
+          <label className='text-xl mr-4 text-gray-500'>Location</label>
           <input
-            type='number'
+            type='string'
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full '
