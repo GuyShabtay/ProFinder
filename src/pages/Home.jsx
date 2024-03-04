@@ -7,11 +7,25 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard';
+import SearchBar from '../components/SearchBar';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
+  const handleSearch = (searchTerm) => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5555/books?q=${searchTerm}`)
+      .then((response) => {
+        setBooks(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }
   useEffect(() => {
     setLoading(true);
     axios
@@ -42,6 +56,7 @@ const Home = () => {
           Card
         </button>
       </div>
+      <SearchBar onSearch={handleSearch} /> {/* Add the SearchBar component */}
       <div className='flex justify-between items-center'>
         <h1 className='text-3xl my-8'>Professionals List</h1>
         <Link to='/books/create'>
