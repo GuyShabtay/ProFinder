@@ -1,0 +1,10 @@
+.bottom-navbar-background-image {
+  background: url("../../assets/pxl-small.jpg") no-repeat center center/cover;
+}
+nav{
+  height: 200px;
+
+}
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Adjust the values as needed */
+}

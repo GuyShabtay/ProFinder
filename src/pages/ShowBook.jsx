@@ -34,10 +34,6 @@ const ShowBook = () => {
       ) : (
         <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
           <div className='my-4'>
-            <span className='text-xl mr-4 text-gray-500'>Id</span>
-            <span>{book._id}</span>
-          </div>
-          <div className='my-4'>
             <span className='text-xl mr-4 text-gray-500'>Name</span>
             <span>{book.name}</span>
           </div>
