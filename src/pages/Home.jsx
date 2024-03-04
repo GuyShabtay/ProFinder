@@ -7,6 +7,8 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard';
+import BottomNavbar from '../components/home/BottomNavbar';
+import './Home.css'
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -27,7 +29,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='p-4'>
+    <div className='p-4 main-background-image'>
       <div className='flex justify-center items-center gap-x-4'>
         <button
           className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
@@ -42,12 +44,17 @@ const Home = () => {
           Card
         </button>
       </div>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Professionals List</h1>
-        <Link to='/books/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4xl' />
-        </Link>
+      <div
+        className='flex justify-center items-center header-background-image'
+      >
+      <h1 className='text-white text-4xl my-8 font-bold '>
+      <span className="text-shadow">Find Pros, Get It Done</span>
+      </h1>
       </div>
+
+      <Link to='/books/create'>
+        <MdOutlineAddBox className='text-sky-800 text-5xl' />
+      </Link>
       {loading ? (
         <Spinner />
       ) : showType === 'table' ? (
@@ -55,6 +62,7 @@ const Home = () => {
       ) : (
         <BooksCard books={books} />
       )}
+      <BottomNavbar books={books}/>
     </div>
   );
 };
