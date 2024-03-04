@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import StarRating from '../components/home/starRating';
+import CommentSection from '../components/home/CommentSection';
 
 const ShowBook = () => {
   const [book, setBook] = useState({});
@@ -57,9 +58,10 @@ const ShowBook = () => {
             <span>{new Date(book.updatedAt).toString()}</span>
           </div>
           <div className='my-4'>
-        
-            <StarRating   />
-          
+            <StarRating />
+          </div>
+          <div className='my-4'>
+            <CommentSection />
           </div>
         </div>
       )}
