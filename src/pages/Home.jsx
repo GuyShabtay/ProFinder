@@ -13,10 +13,10 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
-  const handleSearch = (searchTerm) => {
+  const handleSearch = (searchTerm, searchOption) => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books?q=${searchTerm}`)
+      .get(`http://localhost:5555/books?q=${searchTerm}&option=${searchOption}`)
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);
@@ -25,7 +25,8 @@ const Home = () => {
         console.log(error);
         setLoading(false);
       });
-  }
+  };
+  
   useEffect(() => {
     setLoading(true);
     axios
