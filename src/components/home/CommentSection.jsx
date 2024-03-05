@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { BsArrowRight } from 'react-icons/bs';
+
+
+import './CommentSection.css'
 
 const CommentSection = () => {
   const [comments, setComments] = useState([]);
@@ -24,7 +28,10 @@ const CommentSection = () => {
           value={newComment}
           onChange={handleInputChange}
         />
-        <button onClick={handleAddComment}>Add Comment</button>
+        <button onClick={handleAddComment}>
+
+<BsArrowRight className='arrow-right'/>
+        </button>
       </div>
       <div>
         {comments.map((comment, index) => (
