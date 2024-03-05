@@ -9,6 +9,7 @@ const EditBook = () => {
   const [name, setName] = useState('');
   const [profession, setProfession] = useState('');
   const [location, setLocation] = useState('');
+  const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {id} = useParams();
@@ -20,6 +21,7 @@ const EditBook = () => {
     .then((response) => {
         setProfession(response.data.profession);
         setLocation(response.data.location)
+        setPhone(response.data.phone)
         setName(response.data.name)
         setLoading(false);
       }).catch((error) => {
@@ -34,6 +36,7 @@ const EditBook = () => {
       name,
       profession,
       location,
+      phone,
     };
     setLoading(true);
     axios
@@ -82,6 +85,15 @@ const EditBook = () => {
             type='number'
             value={location}
             onChange={(e) => setLocation(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2  w-full '
+          />
+        </div>
+        <div className='my-4'>
+          <label className='text-xl mr-4 text-gray-500'>Phone</label>
+          <input
+            type='number'
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full '
           />
         </div>
