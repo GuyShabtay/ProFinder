@@ -78,7 +78,9 @@ const Home = () => {
       ) : (
         <BooksCard books={books} />
       )}
+      {/* 
       <BottomNavbar books={books}/>
+      */}
     </div>
   );
 };
