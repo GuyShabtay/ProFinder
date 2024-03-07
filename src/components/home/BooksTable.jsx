@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
+import { BiShow } from 'react-icons/bi';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import BookModal from './BookModal';
+import { useState } from 'react';
 
 const BooksTable = ({ books }) => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <table className='w-full border-separate border-spacing-2'>
       <thead>
@@ -14,9 +19,9 @@ const BooksTable = ({ books }) => {
             Profession
           </th>
           <th className='border border-slate-600 rounded-md max-md:hidden'>
-            Publish Year
+            Location
           </th>
-          <th className='border border-slate-600 rounded-md'>Operations</th>
+          <th className='border border-slate-600 rounded-md'>Info</th>
         </tr>
       </thead>
       <tbody>
@@ -36,17 +41,26 @@ const BooksTable = ({ books }) => {
             </td>
             <td className='border border-slate-700 rounded-md text-center'>
               <div className='flex justify-center gap-x-4'>
+                <button>
+                  <BiShow
+                    className='text-2xl text-green-600 hover:text-black'
+                    onClick={() => setShowModal(true)}
+                  />
+                </button>
                 <Link to={`/books/details/${book._id}`}>
-                  <BsInfoCircle className='text-2xl text-green-800' />
+                  <BsInfoCircle className='text-2xl text-blue-600 hover:text-black'/>
                 </Link>
                 <Link to={`/books/edit/${book._id}`}>
-                  <AiOutlineEdit className='text-2xl text-yellow-600' />
+                  <AiOutlineEdit className='text-2xl text-yellow-600 hover:text-black' />
                 </Link>
                 <Link to={`/books/delete/${book._id}`}>
-                  <MdOutlineDelete className='text-2xl text-red-600' />
+                  <MdOutlineDelete className='text-2xl text-red-600 hover:text-black' />
                 </Link>
               </div>
             </td>
+            {showModal && (
+              <BookModal book={book} onClose={() => setShowModal(false)} />
+            )}
           </tr>
         ))}
       </tbody>

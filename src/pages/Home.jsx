@@ -7,6 +7,9 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard';
+import BottomNavbar from '../components/home/BottomNavbar';
+import './Home.css'
+import SearchBar from '../components/SearchBar';
 import Navbar from '../components/Navbar';
 import { useLocation } from 'react-router-dom';
 
@@ -14,7 +17,20 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
-  const [token, setToken] = useState(null); // State to hold the token
+  const handleSearch = (searchTerm, searchOption) => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5555/books?q=${searchTerm}&option=${searchOption}`)
+      .then((response) => {
+        setBooks(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+    const [token, setToken] = useState(null); // State to hold the token
   const location = useLocation();
   //const username = location.state ? location.state.name : null;
 

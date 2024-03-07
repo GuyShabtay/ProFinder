@@ -1,0 +1,41 @@
+.submit-btn{
+  color: white;
+  background-color: rgb(30, 109, 155);
+  border-radius: 4px;
+  padding: 0px 8px;
+  font-size: 16px;
+  margin-left: 10px;
+  }
+ 
+
+
+
+  .comment {
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-start; */
+    margin-bottom: 10px;
+  }
+  
+  .comment .commenter {
+    font-weight: bold;
+    margin-right: 5px;
+    background-color: #f2f2f2;
+    padding: 4px 10px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+  
+
+
+  
+  .comment .user-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .comment .text {
+    width: fit-content;
+  }
+  
