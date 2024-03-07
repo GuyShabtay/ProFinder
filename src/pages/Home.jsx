@@ -9,11 +9,26 @@ import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard';
 import BottomNavbar from '../components/home/BottomNavbar';
 import './Home.css'
+import SearchBar from '../components/SearchBar';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
+  const handleSearch = (searchTerm, searchOption) => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5555/books?q=${searchTerm}&option=${searchOption}`)
+      .then((response) => {
+        setBooks(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+  
   useEffect(() => {
     setLoading(true);
     axios
@@ -44,6 +59,7 @@ const Home = () => {
           Cards
         </button>
       </div>
+      <SearchBar onSearch={handleSearch} /> {/* Add the SearchBar component */}
       <div
         className='flex justify-center items-center header-background-image'
       >
@@ -64,6 +80,7 @@ const Home = () => {
       )}
       {/*<BottomNavbar books={books}/>*/}
       <BottomNavbar books={books}/>
+      */}
     </div>
   );
 };
