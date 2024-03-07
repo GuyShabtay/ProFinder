@@ -4,9 +4,8 @@ import { BsArrowRight } from 'react-icons/bs';
 
 import './CommentSection.css'
 
-const CommentSection = () => {
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
+const CommentSection = ({comments,setComments,newComment,setNewComment,savedComment,setSavedComment,handleComment}) => {
+  
 
   const handleInputChange = (event) => {
     setNewComment(event.target.value);
@@ -15,7 +14,9 @@ const CommentSection = () => {
   const handleAddComment = () => {
     if (newComment.trim() !== '') {
       setComments([...comments, newComment]);
+      setSavedComment(newComment);
       setNewComment('');
+      handleComment();
     }
   };
 
