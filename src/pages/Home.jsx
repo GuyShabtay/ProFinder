@@ -41,7 +41,7 @@ const Home = () => {
           className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
           onClick={() => setShowType('card')}
         >
-          Card
+          Cards
         </button>
       </div>
       <div
@@ -62,6 +62,7 @@ const Home = () => {
       ) : (
         <BooksCard books={books} />
       )}
+      {/*<BottomNavbar books={books}/>*/}
       <BottomNavbar books={books}/>
     </div>
   );
