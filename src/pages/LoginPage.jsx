@@ -24,6 +24,7 @@ function LoginPage() {
         if (result.data.message === "Success") {
           localStorage.setItem('token', result.data.token);
           localStorage.setItem('name', result.data.username);
+          localStorage.setItem('email', result.data.email);
           navigate("/",{ state: { name: result.data.username } });
         } else {
           navigate("/register");

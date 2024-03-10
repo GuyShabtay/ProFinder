@@ -10,27 +10,14 @@ import BooksCard from '../components/home/BooksCard';
 import BottomNavbar from '../components/home/BottomNavbar';
 import Navbar from '../components/Navbar'
 import SearchBar from '../components/SearchBar';
-
 import './Home.css'
-import SearchBar from '../components/SearchBar';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
-  const handleSearch = (searchTerm, searchOption) => {
-    setLoading(true);
-    axios
-      .get(`http://localhost:5555/books?q=${searchTerm}&option=${searchOption}`)
-      .then((response) => {
-        setBooks(response.data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+
+  
   
   useEffect(() => {
     setLoading(true);
@@ -45,6 +32,7 @@ const Home = () => {
         setLoading(false);
       });
   }, []);
+  
   const handleSearch = (searchTerm, searchOption) => {
     setLoading(true);
     axios
@@ -59,6 +47,7 @@ const Home = () => {
         setLoading(false);
       });
 };
+
 
   return (
     <div className='main-background-image'>

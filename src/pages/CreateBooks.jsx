@@ -15,8 +15,10 @@ const CreateBooks = () => {
 
   const handleSaveBook = () => {
     const name=localStorage.getItem('name')
+    const email=localStorage.getItem('email')
     const data = {
       name,
+      email,
       profession,
       location,
       phone,
@@ -31,7 +33,6 @@ const CreateBooks = () => {
       })
       .catch((error) => {
         setLoading(false);
-        // alert('An error happened. Please Chack console');
         enqueueSnackbar('Error', { variant: 'error' });
         console.log(error);
       });

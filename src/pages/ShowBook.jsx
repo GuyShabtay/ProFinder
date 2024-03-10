@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import StarRating from '../components/home/starRating';
-import CommentSection from '../components/home/CommentSection';
 import { FaStar } from 'react-icons/fa';
 import './ShowBook.css';
 import { useSnackbar } from 'notistack';

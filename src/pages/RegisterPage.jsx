@@ -4,24 +4,42 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import './RegisterPage.css'; 
+import { useSnackbar } from 'notistack';
+
 
 function RegisterPage() {    
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [phone, setPhone] = useState('123456789');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:5555/books/register", { name, email, phone, password })
+        axios.post("http://localhost:5555/books/register", { name, email, phone, password,color })
         .then(result => {
             console.log(result);
             navigate("/LoginPage");
         })
-        .catch(err => console.log(err));
-    };
+        .catch(err => {
+            console.log(err);
+            enqueueSnackbar('Error', { variant: 'error' });
+          });    };
+
+    const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
+
+      const color=getRandomColor();
+
 
 
   return (
@@ -55,18 +73,7 @@ function RegisterPage() {
                             required
                         />
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="phone"><strong>Phone</strong></label>
-                        <input
-                            type="text"
-                            placeholder="Enter Phone"
-                            autoComplete="off"
-                            name="phone"
-                            className="form-control"
-                            onChange={(e) => setPhone(e.target.value)}
-                            required
-                        />
-                    </div>
+                   
                     <div className="mb-3">
                         <label htmlFor="password"><strong>Password</strong></label>
                         <input

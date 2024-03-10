@@ -10,22 +10,22 @@ import axios from 'axios';
 
 const BooksTable = ({ books }) => {
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState(null);
-  const name=localStorage.getItem('name');
+  const [booksOfUser, setBooksOfUser] = useState(null);
+  const searchTerm=localStorage.getItem('email');
+  const searchOption='email'
   useEffect(() => {
-    const name = 'guy6'; // Replace 'desiredUsername' with the actual user name
-    axios.get(`http://localhost:5555/books/user?name=${name}`)
-      .then((response) => {
-        console.log('response', response.data.data);
-        setUser(response.data);
-      })
-      .catch((error) => {
-        alert('An error happened. Please check console');
-        console.log(error);
-      });
+    axios.get(`http://localhost:5555/books?q=${searchTerm}&option=${searchOption}`)
+    .then((response) => {
+      setBooksOfUser(response.data.data);
+      console.log(response.data.data)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }, []);
-  
 
+  
+  
   return (
     <table className='w-full border-separate border-spacing-2'>
       <thead>
@@ -67,12 +67,18 @@ const BooksTable = ({ books }) => {
                 <Link to={`/books/details/${book._id}`}>
                   <BsInfoCircle className='text-2xl text-blue-600 hover:text-black'/>
                 </Link>
-                <Link to={`/books/edit/${book._id}`}>
-                  <AiOutlineEdit className='text-2xl text-yellow-600 hover:text-black' />
-                </Link>
+                {booksOfUser && booksOfUser.some((b) => b.name === book.name) && (
+                  <Link to={`/books/edit/${book._id}`}>
+                    <AiOutlineEdit className='text-2xl text-yellow-600 hover:text-black' />
+                  </Link>
+                )}
+                {booksOfUser && booksOfUser.some((b) => b.name === book.name) && (
+
                 <Link to={`/books/delete/${book._id}`}>
                   <MdOutlineDelete className='text-2xl text-red-600 hover:text-black' />
                 </Link>
+                )}
+
               </div>
             </td>
             {showModal && (
