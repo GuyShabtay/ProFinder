@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 const EditBook = () => {
-  const [name, setName] = useState('');
   const [profession, setProfession] = useState('');
   const [location, setLocation] = useState('');
   const [phone, setPhone] = useState('');
@@ -22,7 +21,6 @@ const EditBook = () => {
         setProfession(response.data.profession);
         setLocation(response.data.location)
         setPhone(response.data.phone)
-        setName(response.data.name)
         setLoading(false);
       }).catch((error) => {
         setLoading(false);
@@ -33,7 +31,6 @@ const EditBook = () => {
   
   const handleEditBook = () => {
     const data = {
-      name,
       profession,
       location,
       phone,
@@ -58,22 +55,13 @@ const EditBook = () => {
     <div className='p-4'>
     
       <BackButton />
-      <h1 className='text-3xl my-4'>Edit Book</h1>
+      <h1 className='text-3xl my-4'>Edit Profile</h1>
       {loading ? <Spinner /> : ''}
       <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Name</label>
-          <input
-            type='text'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
-          />
-        </div>
-        <div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Profession</label>
           <input
-            type='text'
+            type='string'
             value={profession}
             onChange={(e) => setProfession(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full '
@@ -82,7 +70,7 @@ const EditBook = () => {
         <div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Location</label>
           <input
-            type='number'
+            type='string'
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full '
