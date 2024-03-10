@@ -1,0 +1,46 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    
+  }
+  
+  .logo-text {
+    font-size: 30px;
+  }
+  
+  .navbar-right button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .navbar-right button:hover {
+    background-color: #0056b3;
+  }
+  
+  .name {
+    margin-left: 10px;
+    color: white;
+  }
+  .logo-img{
+    background-image: url('../assets/Profinder logo.png');
+  background-size: contain; /* Adjust as needed */
+  background-repeat: no-repeat;
+  width: 50px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+  margin-right: 7px;
+  }
+  .logo{
+    display: flex;
+  }
+  .navbar-center{
+    margin-right: 90px;
+  }

@@ -10,6 +10,7 @@ import './ShowBook.css';
 import { useSnackbar } from 'notistack';
 import { BsArrowRight } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
+import Navbar from '../components/Navbar';
 
 
 
@@ -22,6 +23,8 @@ const ShowBook = () => {
   const [newComment, setNewComment] = useState('');
   const [savedComment, setSavedComment] = useState('');
   const { enqueueSnackbar } = useSnackbar();
+  const name=localStorage.getItem('name')
+
 
 
   useEffect(() => {
@@ -43,6 +46,11 @@ const ShowBook = () => {
     if (rating !== 0) {
       // const newRating = (book.rating + rating) / book.ratedUsers.length + 1;
       // setBook({ ...book, rating: newRating });
+      if(!name)
+    {
+      enqueueSnackbar('Only registered users can rate', { variant: 'error' });
+      return;
+    }
       saveRating();
       window.location.reload();
 
@@ -53,7 +61,7 @@ const ShowBook = () => {
   const saveComment = () => {
     console.log('savedComment',savedComment)
     const newCommentUser = {
-      commenter: 'Guy', 
+      commenter: name, 
       text: savedComment, 
       color: getRandomColor(), 
     };
@@ -72,7 +80,7 @@ const ShowBook = () => {
   };
   const saveRating = () => {
     const newRatedUser = {
-      user: 'Guy', // Replace 'user_id_here' with the actual user ID
+      user: name, // Replace 'user_id_here' with the actual user ID
       userRating: rating, // Example rating value
     };
     setLoading(true);
@@ -117,25 +125,10 @@ const ShowBook = () => {
     return color;
   };
 
-//   // Define a mapping between names and colors
-// const nameColorMap = {};
-
-// // Generate random color if not assigned already
-// const getRandomColor = (name) => {
-//     if (!nameColorMap[name]) {
-//         const letters = '0123456789ABCDEF';
-//         let color = '#';
-//         for (let i = 0; i < 6; i++) {
-//             color += letters[Math.floor(Math.random() * 16)];
-//         }
-//         nameColorMap[name] = color;
-//     }
-//     return nameColorMap[name];
-// };
 
 const getUserRating = () => {
   if (book.ratedUsers) {
-      const matchedUser = book.ratedUsers.find(rated => rated.user === 'Guy');
+      const matchedUser = book.ratedUsers.find(rated => rated.user === name);
       if (matchedUser) {
           return matchedUser.userRating;
       }
@@ -144,18 +137,15 @@ const getUserRating = () => {
 }
 
 
-
-
-
-
   return (
-    <div className='p-4'>
-      <BackButton />
-      <h1 className='text-3xl my-4'>More Details</h1>
+    <div className='show-book'>
+    <Navbar/>
+      <BackButton  />
+      <h1 className='text-3xl m-4'>More Details</h1>
       {loading ? (
         <Spinner />
       ) : (
-        <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
+        <div className='m-4 flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
           <div>
             <span className='text-xl mr-4 text-gray-500'>Name</span>
             <span>{book.name}</span>
@@ -176,14 +166,6 @@ const getUserRating = () => {
             <span className='text-xl mr-4 text-gray-500'>Rating</span>
             <span className='mr-1'>{Math.round(book.rating)}</span>
             <FaStar color={'#ffc107'} />
-          </div>
-          <div>
-            <span className='text-xl mr-4 text-gray-500'>Create Time</span>
-            <span>{new Date(book.createdAt).toString()}</span>
-          </div>
-          <div>
-            <span className='text-xl mr-4 text-gray-500'>Last Update Time</span>
-            <span>{new Date(book.updatedAt).toString()}</span>
           </div>
           <div className='text-xl mr-4 text-gray-500 flex items-center'>
           {!getUserRating() ?(
@@ -212,11 +194,11 @@ const getUserRating = () => {
           
 
           </div>
-          <div className='my-1'>
-{           /* <CommentSection comments={comments} setComments={setComments} newComment={newComment} setNewComment={setNewComment} savedComment={savedComment} setSavedComment={setSavedComment} handleComment={handleComment}  />
-              */}         
-               </div>
-         <div>
+         
+         
+        </div>
+      )}
+      <div className='pl-4'>
          <h2>Comments</h2>
       <div>
         <textarea
@@ -244,8 +226,6 @@ const getUserRating = () => {
         )}
        
       </div>
-        </div>
-      )}
     </div>
   );
 };

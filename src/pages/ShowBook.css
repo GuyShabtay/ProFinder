@@ -38,4 +38,16 @@
   .comment .text {
     width: fit-content;
   }
+  .back-btn{
+    margin-top: 10px !important;
+  }
+  .show-book {
+    background: url("../assets/bg.jpg") no-repeat center center/cover;
+    position: fixed;
+    left: 0;
+    bottom: 0;  
+    width: 100vw;
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
   

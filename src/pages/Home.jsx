@@ -8,6 +8,9 @@ import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard';
 import BottomNavbar from '../components/home/BottomNavbar';
+import Navbar from '../components/Navbar'
+import SearchBar from '../components/SearchBar';
+
 import './Home.css'
 
 const Home = () => {
@@ -27,34 +30,57 @@ const Home = () => {
         setLoading(false);
       });
   }, []);
+  const handleSearch = (searchTerm, searchOption) => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5555/books?q=${searchTerm}&option=${searchOption}`)
+      .then((response) => {
+        setBooks(response.data.data);
+        console.log(response.data.data)
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+};
 
   return (
-    <div className='p-4 main-background-image'>
-      <div className='flex justify-center items-center gap-x-4'>
-        <button
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
-          onClick={() => setShowType('table')}
-        >
-          Table
-        </button>
-        <button
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
-          onClick={() => setShowType('card')}
-        >
-          Cards
-        </button>
-      </div>
-      <div
-        className='flex justify-center items-center header-background-image'
-      >
-      <h1 className='text-white text-4xl my-8 font-bold '>
-      <span className="text-shadow">Find Pros, Get It Done</span>
-      </h1>
-      </div>
+    <div className='main-background-image'>
+    <Navbar/>
+    <div
+    className='flex justify-center items-center header-background-image'
+    >
+    <h1 className='text-white text-4xl my-8 font-bold '>
+    <span className="text-shadow">Find Pros, Get It Done</span>
+    </h1>
+    </div>
+    <SearchBar onSearch={handleSearch} /> 
 
-      <Link to='/books/create'>
-        <MdOutlineAddBox className='text-sky-800 text-5xl' />
-      </Link>
+
+     <div className='toggle-container'>
+      <button
+        className={`toggle-button ${showType === 'table' ? 'active' : ''}`}
+        onClick={() => setShowType('table')}
+      >
+        Table
+      </button>
+      <button
+        className={`toggle-button ${showType === 'card' ? 'active' : ''}`}
+        onClick={() => setShowType('card')}
+      >
+        Cards
+      </button>
+    </div>
+{ localStorage.getItem('name') &&
+
+    <div style={{ display: 'inline-block', position: 'relative' }}>
+    <Link to='/books/create'>
+      <MdOutlineAddBox className='text-sky-800 text-5xl' />
+    </Link>
+  </div>
+}
+  
       {loading ? (
         <Spinner />
       ) : showType === 'table' ? (

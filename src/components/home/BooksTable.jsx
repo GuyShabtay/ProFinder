@@ -4,10 +4,27 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { BiShow } from 'react-icons/bi';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import BookModal from './BookModal';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import axios from 'axios';
+
 
 const BooksTable = ({ books }) => {
   const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState(null);
+  const name=localStorage.getItem('name');
+  useEffect(() => {
+    const name = 'guy6'; // Replace 'desiredUsername' with the actual user name
+    axios.get(`http://localhost:5555/books/user?name=${name}`)
+      .then((response) => {
+        console.log('response', response.data.data);
+        setUser(response.data);
+      })
+      .catch((error) => {
+        alert('An error happened. Please check console');
+        console.log(error);
+      });
+  }, []);
+  
 
   return (
     <table className='w-full border-separate border-spacing-2'>

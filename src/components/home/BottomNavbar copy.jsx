@@ -4,31 +4,35 @@ import { BsInfoCircle } from 'react-icons/bs';
 import './BottomNavbar.css';
 import { FaStar } from 'react-icons/fa';
 
-const BottomNavbar = ({ books }) => {
-  const [sortedBooks, setSortedBooks] = useState([]);
-  const [currentBookIndex, setCurrentBookIndex] = useState(0);
+const BottomNavbar = ({ profiles }) => {
+  const [sortedUsers, setSortedUsers] = useState([]);
+  const [currentUserIndex, setCurrentUserIndex] = useState(0);
 
   useEffect(() => {
-    // Sort the books by rating from highest to lowest
-    const sortedBooks = [...books].sort((a, b) => b.rating - a.rating);
-    setSortedBooks(sortedBooks);
+    // Filter profiles whose 'profession' field exists
+    const filteredUsers = profiles.filter(user => user.profession);
+
+    // Sort the filtered profiles by rating from highest to lowest
+    const sortedUsers = [...filteredUsers].sort((a, b) => b.rating - a.rating);
+    setSortedUsers(sortedUsers);
 
     let currentIndex = 0;
 
     const interval = setInterval(() => {
-      setCurrentBookIndex(currentIndex);
-      currentIndex = (currentIndex + 1) % sortedBooks.length;
-    }, 3000);
+      setCurrentUserIndex(currentIndex);
+      currentIndex = (currentIndex + 1) % sortedUsers.length;
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, [books]);
+  }, [profiles]);
+
 
 
 
   
   const getRating = () => {
-    if (sortedBooks && sortedBooks[currentBookIndex] && sortedBooks[currentBookIndex].rating) {
-      return sortedBooks[currentBookIndex].rating;
+    if (sortedUsers && sortedUsers[currentUserIndex] && sortedUsers[currentUserIndex].rating) {
+      return sortedUsers[currentUserIndex].rating;
     } else {
       return 0;
     }
@@ -39,12 +43,12 @@ const BottomNavbar = ({ books }) => {
       <div className='bottom-navbar-content'>
         <div className='text'>
           <h1 className='bottom-navbar-title'>Most rated Professionals</h1>
-          {sortedBooks && sortedBooks[currentBookIndex] && (
+          {sortedUsers && sortedUsers[currentUserIndex] && (
             <div className='person-text'>
-              {sortedBooks[currentBookIndex].name}-{' '}
-              {sortedBooks[currentBookIndex].profession}
+              {sortedUsers[currentUserIndex].name}-{' '}
+              {sortedUsers[currentUserIndex].profession}
               <Link
-                to={`/books/details/${sortedBooks[currentBookIndex]._id}`}
+                to={`/users/details/${sortedUsers[currentUserIndex]._id}`}
                 className='bottom-navbar-link'
               >
                 <BsInfoCircle className='text-2xl hover:text-black ml-3' />
