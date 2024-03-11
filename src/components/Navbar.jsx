@@ -5,29 +5,27 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
-  const isLoggedIn = location.pathname !== "/LoginPage"; // Assuming LoginPage is where the user logs in
+  const isLoggedIn = location.pathname !== "/LoginPage"; 
   const [authenticated, setAuthenticated] = useState(false);
-  const [username, setUsername] = useState(""); // State to hold the user's name
-  const navigate = useNavigate();
+  const [username, setUsername] = useState(""); 
 
   useEffect(() => {
-    // Check if token exists in local storage
     const token = localStorage.getItem('token');
     if (token) {
       setAuthenticated(true);
-      // Retrieve username from local storage
       const storedUsername = localStorage.getItem('name');
       setUsername(storedUsername);
     }
   }, []);
 
   const handleSignOut = () => {
-    // Remove token and username from local storage
     localStorage.removeItem('token');
     localStorage.removeItem('name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    localStorage.removeItem('color');
     setAuthenticated(false);
     window.location.reload();
-    // navigate("/");
   };
 
   return (

@@ -9,7 +9,6 @@ const BottomNavbar = ({ profiles }) => {
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
 
   useEffect(() => {
-    // Sort the profiles by rating from highest to lowest
     const sortedProfiles = [...profiles].sort((a, b) => b.rating - a.rating);
     setSortedProfiles(sortedProfiles);
 

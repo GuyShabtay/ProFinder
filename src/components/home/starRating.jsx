@@ -15,7 +15,7 @@ const StarRating = ({ rating, setRating }) => {
               name='rating'
               value={ratingValue}
               onClick={() => setRating(ratingValue)}
-              style={{ display: 'none' }} // Hide the radio button
+              style={{ display: 'none' }} 
             />
             <FaStar
               className='star'
@@ -23,7 +23,7 @@ const StarRating = ({ rating, setRating }) => {
               size={30}
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
-              style={{ cursor: 'pointer' }} // Change cursor to pointer on hover
+              style={{ cursor: 'pointer' }} 
             />
           </label>
         );
