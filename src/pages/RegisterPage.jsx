@@ -19,7 +19,7 @@ function RegisterPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:5555/books/register", { name, email, phone, password,color })
+        axios.post("http://localhost:5555/profiles/register", { name, email, phone, password,color })
         .then(result => {
             console.log(result);
             navigate("/LoginPage");

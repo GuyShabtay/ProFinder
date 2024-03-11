@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
-import BooksTable from '../components/home/BooksTable';
-import BooksCard from '../components/home/BooksCard';
+import ProfilesTable from '../components/home/ProfilesTable';
+import ProfilesCard from '../components/home/ProfilesCard';
 import BottomNavbar from '../components/home/BottomNavbar';
 import Navbar from '../components/Navbar'
 import SearchBar from '../components/SearchBar';
 import './Home.css'
 
 const Home = () => {
-  const [books, setBooks] = useState([]);
+  const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
 
@@ -22,9 +22,9 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:5555/books')
+      .get('http://localhost:5555/profiles')
       .then((response) => {
-        setBooks(response.data.data);
+        setProfiles(response.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -36,9 +36,9 @@ const Home = () => {
   const handleSearch = (searchTerm, searchOption) => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books?q=${searchTerm}&option=${searchOption}`)
+      .get(`http://localhost:5555/profiles?q=${searchTerm}&option=${searchOption}`)
       .then((response) => {
-        setBooks(response.data.data);
+        setProfiles(response.data.data);
         console.log(response.data.data)
         setLoading(false);
       })
@@ -79,7 +79,7 @@ const Home = () => {
 { localStorage.getItem('name') &&
 
     <div style={{ display: 'inline-block', position: 'relative' }}>
-    <Link to='/books/create'>
+    <Link to='/profiles/create'>
       <MdOutlineAddBox className='text-sky-800 text-5xl' />
     </Link>
   </div>
@@ -88,11 +88,11 @@ const Home = () => {
       {loading ? (
         <Spinner />
       ) : showType === 'table' ? (
-        <BooksTable books={books} />
+        <ProfilesTable profiles={profiles} />
       ) : (
-        <BooksCard books={books} />
+        <ProfilesCard profiles={profiles} />
       )}
-      <BottomNavbar books={books}/>
+      <BottomNavbar profiles={profiles}/>
     </div>
   );
 };

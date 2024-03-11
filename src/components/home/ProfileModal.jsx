@@ -1,5 +1,4 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import { PiBookOpenTextLight } from 'react-icons/pi';
 import { BiUserCircle } from 'react-icons/bi';
 import { MdPhone } from 'react-icons/md';
 import { MdWork } from 'react-icons/md';
@@ -8,7 +7,7 @@ import { MdLocationOn } from 'react-icons/md';
 
 
 
-const BookModal = ({ book, onClose }) => {
+const ProfileModal = ({ profile, onClose }) => {
   return (
     <div
       onClick={onClose}
@@ -39,23 +38,23 @@ const BookModal = ({ book, onClose }) => {
         />
         <h2 className='flex w-fit px-4 py-1 bg-red-300 rounded-lg mt-5'>
         <MdLocationOn className='text-2xl'/>
-          {book.location}
+          {profile.location}
         </h2>
         <div className='flex justify-start items-center gap-x-2 mt-2'>
           <BiUserCircle className='text-red-300 text-5xl' />
-          <h2 className='my-1'>{book.name}</h2>
+          <h2 className='my-1'>{profile.name}</h2>
         </div>
         <div className='flex justify-start items-center gap-x-2 mt-2'>
           <MdWork className='text-red-300 text-5xl' />
-          <h2 className='my-1'>{book.profession}</h2>
+          <h2 className='my-1'>{profile.profession}</h2>
         </div>
         <div className='flex justify-start items-center gap-x-2 mt-2'>
           <MdPhone className='text-red-300 text-5xl' />
-          <h2 className='my-1'>{book.phone}</h2>
+          <h2 className='my-1'>{profile.phone}</h2>
         </div>        
       </div>
     </div>
   );
 };
 
-export default BookModal;
+export default ProfileModal;
