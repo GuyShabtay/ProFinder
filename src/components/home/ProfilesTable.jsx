@@ -17,7 +17,6 @@ const ProfilesTable = ({ profiles }) => {
     axios.get(`http://localhost:5555/profiles?q=${searchTerm}&option=${searchOption}`)
     .then((response) => {
       setProfilesOfUser(response.data.data);
-      console.log(response.data.data)
     })
     .catch((error) => {
       console.log(error);
@@ -67,12 +66,12 @@ const ProfilesTable = ({ profiles }) => {
                 <Link to={`/profiles/details/${profile._id}`}>
                   <BsInfoCircle className='text-2xl text-blue-600 hover:text-black'/>
                 </Link>
-                {profilesOfUser && profilesOfUser.some((b) => b.name === profile.name) && (
+                {profilesOfUser && profilesOfUser.some((b) => b.email === profile.email) && (
                   <Link to={`/profiles/edit/${profile._id}`}>
                     <AiOutlineEdit className='text-2xl text-yellow-600 hover:text-black' />
                   </Link>
                 )}
-                {profilesOfUser && profilesOfUser.some((b) => b.name === profile.name) && (
+                {profilesOfUser && profilesOfUser.some((b) => b.email === profile.email) && (
 
                 <Link to={`/profiles/delete/${profile._id}`}>
                   <MdOutlineDelete className='text-2xl text-red-600 hover:text-black' />

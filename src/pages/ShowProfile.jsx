@@ -24,6 +24,7 @@ const ShowProfile = () => {
   const { enqueueSnackbar } = useSnackbar();
   const name=localStorage.getItem('name')
   const color=localStorage.getItem('color')
+  const email=localStorage.getItem('email')
 
 
 
@@ -44,7 +45,7 @@ const ShowProfile = () => {
   
   const handleSubmit = () => {
     if (rating !== 0) {
-      if(!name)
+      if(!email)
     {
       enqueueSnackbar('Only registered users can rate', { variant: 'error' });
       return;
@@ -57,7 +58,6 @@ const ShowProfile = () => {
   
 
   const saveComment = () => {
-    console.log('savedComment',savedComment)
     const newCommentUser = {
       commenter: name, 
       text: savedComment, 
@@ -78,8 +78,8 @@ const ShowProfile = () => {
   };
   const saveRating = () => {
     const newRatedUser = {
-      user: name, // Replace 'user_id_here' with the actual user ID
-      userRating: rating, // Example rating value
+      email: email, 
+      userRating: rating, 
     };
     setLoading(true);
     axios
@@ -104,8 +104,6 @@ const ShowProfile = () => {
   const handleAddComment = () => {
     if (newComment.trim() !== '') {
       setComments([...comments, newComment]);
-      console.log('newComment',newComment)
-      console.log('savedComment',savedComment)
       setNewComment('');
       saveComment();
       window.location.reload();
@@ -126,7 +124,7 @@ const ShowProfile = () => {
 
 const getUserRating = () => {
   if (profile.ratedUsers) {
-      const matchedUser = profile.ratedUsers.find(rated => rated.user === name);
+      const matchedUser = profile.ratedUsers.find(rated => rated.email === email);
       if (matchedUser) {
           return matchedUser.userRating;
       }
@@ -220,7 +218,7 @@ const getUserRating = () => {
             </div>
           ))
         ) : (
-          console.log('There are 0 comments')
+          console.log('there are no new comments yet')
         )}
        
       </div>

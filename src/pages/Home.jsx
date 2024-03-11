@@ -39,7 +39,6 @@ const Home = () => {
       .get(`http://localhost:5555/profiles?q=${searchTerm}&option=${searchOption}`)
       .then((response) => {
         setProfiles(response.data.data);
-        console.log(response.data.data)
         setLoading(false);
       })
       .catch((error) => {
