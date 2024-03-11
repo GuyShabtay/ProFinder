@@ -5,7 +5,7 @@ import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import StarRating from '../components/home/starRating';
 import { FaStar } from 'react-icons/fa';
-import './ShowBook.css';
+import './ShowProfile.css';
 import { useSnackbar } from 'notistack';
 import { BsArrowRight } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
@@ -13,9 +13,9 @@ import Navbar from '../components/Navbar';
 
 
 
-const ShowBook = () => {
+const ShowProfile = () => {
   const { id } = useParams();
-  const [book, setBook] = useState({});
+  const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(false);
   const [rating, setRating] = useState(0);
   const [comments, setComments] = useState([]);
@@ -23,28 +23,27 @@ const ShowBook = () => {
   const [savedComment, setSavedComment] = useState('');
   const { enqueueSnackbar } = useSnackbar();
   const name=localStorage.getItem('name')
+  const color=localStorage.getItem('color')
 
 
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`http://localhost:5555/profiles/${id}`)
       .then((response) => {
-        setBook(response.data);
+        setProfile(response.data);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-  }, [id]); // Added id to the dependency array to fetch data when id changes
+  }, [id]); 
 
   
   const handleSubmit = () => {
     if (rating !== 0) {
-      // const newRating = (book.rating + rating) / book.ratedUsers.length + 1;
-      // setBook({ ...book, rating: newRating });
       if(!name)
     {
       enqueueSnackbar('Only registered users can rate', { variant: 'error' });
@@ -62,14 +61,14 @@ const ShowBook = () => {
     const newCommentUser = {
       commenter: name, 
       text: savedComment, 
-      color: getRandomColor(), 
+      color: color, 
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/books/comment/${id}`, newCommentUser)
+      .put(`http://localhost:5555/profiles/comment/${id}`, newCommentUser)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('Book Edited successfully', { variant: 'success' });
+        enqueueSnackbar('Profile Edited successfully', { variant: 'success' });
       })
       .catch((error) => {
         setLoading(false);
@@ -84,10 +83,10 @@ const ShowBook = () => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/books/rating/${id}`, newRatedUser)
+      .put(`http://localhost:5555/profiles/rating/${id}`, newRatedUser)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('Book Edited successfully', { variant: 'success' });
+        enqueueSnackbar('Profile Edited successfully', { variant: 'success' });
       })
       .catch((error) => {
         setLoading(false);
@@ -126,8 +125,8 @@ const ShowBook = () => {
 
 
 const getUserRating = () => {
-  if (book.ratedUsers) {
-      const matchedUser = book.ratedUsers.find(rated => rated.user === name);
+  if (profile.ratedUsers) {
+      const matchedUser = profile.ratedUsers.find(rated => rated.user === name);
       if (matchedUser) {
           return matchedUser.userRating;
       }
@@ -137,7 +136,7 @@ const getUserRating = () => {
 
 
   return (
-    <div className='show-book'>
+    <div className='show-profile'>
     <Navbar/>
       <BackButton  />
       <h1 className='text-3xl m-4'>More Details</h1>
@@ -147,23 +146,23 @@ const getUserRating = () => {
         <div className='m-4 flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
           <div>
             <span className='text-xl mr-4 text-gray-500'>Name</span>
-            <span>{book.name}</span>
+            <span>{profile.name}</span>
           </div>
           <div>
             <span className='text-xl mr-4 text-gray-500'>Profession</span>
-            <span>{book.profession}</span>
+            <span>{profile.profession}</span>
           </div>
           <div>
             <span className='text-xl mr-4 text-gray-500'>Location</span>
-            <span>{book.location}</span>
+            <span>{profile.location}</span>
           </div>
           <div>
             <span className='text-xl mr-4 text-gray-500'>Phone</span>
-            <span>{book.phone}</span>
+            <span>{profile.phone}</span>
           </div>
           <div className=' flex items-center'>
             <span className='text-xl mr-4 text-gray-500'>Rating</span>
-            <span className='mr-1'>{Math.round(book.rating)}</span>
+            <span className='mr-1'>{Math.round(profile.rating)}</span>
             <FaStar color={'#ffc107'} />
           </div>
           <div className='text-xl mr-4 text-gray-500 flex items-center'>
@@ -210,8 +209,8 @@ const getUserRating = () => {
 <BsArrowRight className='arrow-right'/>
         </button>
         </div>
-        {book.comments && book.comments.length > 0 ? (
-          book.comments.map((comment, index) => (
+        {profile.comments && profile.comments.length > 0 ? (
+          profile.comments.map((comment, index) => (
             <div key={index} className='comment'>
             <FaUser className='user-icon' style={{ color: comment.color, marginRight: '5px' }}/>
               <div>
@@ -229,4 +228,4 @@ const getUserRating = () => {
   );
 };
 
-export default ShowBook;
+export default ShowProfile;

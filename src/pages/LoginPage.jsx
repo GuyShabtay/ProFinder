@@ -18,13 +18,14 @@ function LoginPage() {
   axios.defaults.withCredentials=true;
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5555/books/login", { email, password })
+    axios.post("http://localhost:5555/profiles/login", { email, password })
       .then(result => {
         console.log(result);
         if (result.data.message === "Success") {
           localStorage.setItem('token', result.data.token);
           localStorage.setItem('name', result.data.username);
           localStorage.setItem('email', result.data.email);
+          localStorage.setItem('color', result.data.color);
           navigate("/",{ state: { name: result.data.username } });
         } else {
           navigate("/register");

@@ -3,20 +3,20 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { BiShow } from 'react-icons/bi';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
-import BookModal from './BookModal';
+import ProfileModal from './ProfileModal';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 
 
-const BooksTable = ({ books }) => {
+const ProfilesTable = ({ profiles }) => {
   const [showModal, setShowModal] = useState(false);
-  const [booksOfUser, setBooksOfUser] = useState(null);
+  const [profilesOfUser, setProfilesOfUser] = useState(null);
   const searchTerm=localStorage.getItem('email');
   const searchOption='email'
   useEffect(() => {
-    axios.get(`http://localhost:5555/books?q=${searchTerm}&option=${searchOption}`)
+    axios.get(`http://localhost:5555/profiles?q=${searchTerm}&option=${searchOption}`)
     .then((response) => {
-      setBooksOfUser(response.data.data);
+      setProfilesOfUser(response.data.data);
       console.log(response.data.data)
     })
     .catch((error) => {
@@ -42,19 +42,19 @@ const BooksTable = ({ books }) => {
         </tr>
       </thead>
       <tbody>
-        {books.map((book, index) => (
-          <tr key={book._id} className='h-8'>
+        {profiles.map((profile, index) => (
+          <tr key={profile._id} className='h-8'>
             <td className='border border-slate-700 rounded-md text-center'>
               {index + 1}
             </td>
             <td className='border border-slate-700 rounded-md text-center'>
-              {book.name}
+              {profile.name}
             </td>
             <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-              {book.profession}
+              {profile.profession}
             </td>
             <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-              {book.location}
+              {profile.location}
             </td>
             <td className='border border-slate-700 rounded-md text-center'>
               <div className='flex justify-center gap-x-4'>
@@ -64,17 +64,17 @@ const BooksTable = ({ books }) => {
                     onClick={() => setShowModal(true)}
                   />
                 </button>
-                <Link to={`/books/details/${book._id}`}>
+                <Link to={`/profiles/details/${profile._id}`}>
                   <BsInfoCircle className='text-2xl text-blue-600 hover:text-black'/>
                 </Link>
-                {booksOfUser && booksOfUser.some((b) => b.name === book.name) && (
-                  <Link to={`/books/edit/${book._id}`}>
+                {profilesOfUser && profilesOfUser.some((b) => b.name === profile.name) && (
+                  <Link to={`/profiles/edit/${profile._id}`}>
                     <AiOutlineEdit className='text-2xl text-yellow-600 hover:text-black' />
                   </Link>
                 )}
-                {booksOfUser && booksOfUser.some((b) => b.name === book.name) && (
+                {profilesOfUser && profilesOfUser.some((b) => b.name === profile.name) && (
 
-                <Link to={`/books/delete/${book._id}`}>
+                <Link to={`/profiles/delete/${profile._id}`}>
                   <MdOutlineDelete className='text-2xl text-red-600 hover:text-black' />
                 </Link>
                 )}
@@ -82,7 +82,7 @@ const BooksTable = ({ books }) => {
               </div>
             </td>
             {showModal && (
-              <BookModal book={book} onClose={() => setShowModal(false)} />
+              <ProfileModal profile={profile} onClose={() => setShowModal(false)} />
             )}
           </tr>
         ))}
@@ -91,4 +91,4 @@ const BooksTable = ({ books }) => {
   );
 };
 
-export default BooksTable;
+export default ProfilesTable;
