@@ -1,0 +1,221 @@
+{
+  "stats": {
+    "suites": 4,
+    "tests": 4,
+    "passes": 3,
+    "pending": 0,
+    "failures": 1,
+    "start": "2024-03-12T21:14:31.227Z",
+    "end": "2024-03-12T21:14:37.526Z",
+    "duration": 6299,
+    "testsRegistered": 4,
+    "passPercent": 75,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c94f4e92-be67-4e48-acdd-0fcbaf4b41e1",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8b291389-915b-4481-aa95-1b39f70d12f1",
+          "title": "search bar test",
+          "fullFile": "C:\\Users\\Adir\\Desktop\\ProFinder\\ProFinder-frontend\\test\\searchBar.js",
+          "file": "\\test\\searchBar.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "search bar test success",
+              "fullTitle": "search bar test search bar test success",
+              "timedOut": null,
+              "duration": 2841,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(Browser.CHROME).build();\nawait driver.get('http://localhost:5173/');\nawait driver.findElement(By.css('.search-input')).sendKeys('hen');\nawait driver.findElement(By.css('.search-button')).click();\nawait driver.quit();",
+              "err": {},
+              "uuid": "9faf556a-3c4d-4c6c-824c-7f4bf8b842a7",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9faf556a-3c4d-4c6c-824c-7f4bf8b842a7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2841,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "f697c765-6af1-4c51-bd9d-771feeb2688d",
+          "title": "unique Email test",
+          "fullFile": "C:\\Users\\Adir\\Desktop\\ProFinder\\ProFinder-frontend\\test\\uniqueEmail.js",
+          "file": "\\test\\uniqueEmail.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "unique email test success",
+              "fullTitle": "unique Email test unique email test success",
+              "timedOut": null,
+              "duration": 3068,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(Browser.CHROME).build();\nawait driver.get('http://localhost:5173/');\nawait driver.findElement(By.linkText('Register')).click();\nawait driver.findElement(By.name('name')).sendKeys('example');\nawait driver.findElement(By.name('email')).sendKeys('adir@gmail.com');\nawait driver.findElement(By.name('password')).sendKeys('123456');\nawait driver.findElement(By.css('.btn.btn-success')).click();\n\nawait driver.wait(until.urlIs('http://localhost:5173/RegisterPage'), 3000);\n// Get the current URL\nconst currentUrl = await driver.getCurrentUrl();\n// Assert if the current URL matches the expected URL\nassert.equal(currentUrl, 'http://localhost:5173/RegisterPage', 'Expected URL does not match actual URL');\n\n// Close the browser\nawait driver.quit();",
+              "err": {},
+              "uuid": "7f9ba0c8-3952-43eb-b684-07aaee083eb3",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7f9ba0c8-3952-43eb-b684-07aaee083eb3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3068,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "f081f39f-f372-4374-b35b-8e8a5199e3d6",
+          "title": "login test",
+          "fullFile": "C:\\Users\\Adir\\Desktop\\ProFinder\\ProFinder-frontend\\test\\loginTest.js",
+          "file": "\\test\\loginTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "login test success",
+              "fullTitle": "login test login test success",
+              "timedOut": null,
+              "duration": 3216,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(Browser.CHROME).build();\nawait driver.get('http://localhost:5173/');\nawait driver.findElement(By.linkText('Login')).click();\nawait driver.findElement(By.name('email')).sendKeys('adir@gmail.com');\nawait driver.findElement(By.name('password')).sendKeys('123');\nawait driver.findElement(By.css('.btn.btn-success')).click();\n\nawait driver.wait(until.urlIs('http://localhost:5173/'), 3000);\n// Get the current URL\nconst currentUrl = await driver.getCurrentUrl();\n// Assert if the current URL matches the expected URL\nassert.equal(currentUrl, 'http://localhost:5173/', 'Expected URL does not match actual URL');\n\n// Close the browser\nawait driver.quit();",
+              "err": {},
+              "uuid": "54d1107b-0193-482c-8bfa-f4dbe0cf0397",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "54d1107b-0193-482c-8bfa-f4dbe0cf0397"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3216,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "eeb09717-e730-424a-a78e-b50772a9c93c",
+          "title": "register test",
+          "fullFile": "C:\\Users\\Adir\\Desktop\\ProFinder\\ProFinder-frontend\\test\\registerTest.js",
+          "file": "\\test\\registerTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "register test success",
+              "fullTitle": "register test register test success",
+              "timedOut": null,
+              "duration": 6035,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "let driver = await new Builder().forBrowser(Browser.CHROME).build();\nawait driver.get('http://localhost:5173/');\nawait driver.findElement(By.linkText('Register')).click();\nawait driver.findElement(By.name('name')).sendKeys('example');\nawait driver.findElement(By.name('email')).sendKeys('example2@gmail.com');\nawait driver.findElement(By.name('password')).sendKeys('123456');\nawait driver.findElement(By.css('.btn.btn-success')).click();\n\nawait driver.wait(until.urlIs('http://localhost:5173/LoginPage'), 3000);\n// Get the current URL\nconst currentUrl = await driver.getCurrentUrl();\n// Assert if the current URL matches the expected URL\nassert.equal(currentUrl, 'http://localhost:5173/LoginPage', 'Expected URL does not match actual URL');\n\n// Close the browser\nawait driver.quit();",
+              "err": {
+                "message": "NoSuchWindowError: no such window: target window already closed\nfrom unknown error: web view not found\n  (Session info: chrome=122.0.6261.112)",
+                "estack": "NoSuchWindowError: no such window: target window already closed\nfrom unknown error: web view not found\n  (Session info: chrome=122.0.6261.112)\n    at Object.throwDecodedError (node_modules\\selenium-webdriver\\lib\\error.js:521:15)\n    at parseHttpResponse (node_modules\\selenium-webdriver\\lib\\http.js:510:13)\n    at Executor.execute (node_modules\\selenium-webdriver\\lib\\http.js:443:28)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Driver.execute (node_modules\\selenium-webdriver\\lib\\webdriver.js:740:17)",
+                "diff": null
+              },
+              "uuid": "f51aef2c-5eb5-4aea-846b-e92f51d9f01b",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f51aef2c-5eb5-4aea-846b-e92f51d9f01b"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 6035,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 0
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.3.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
