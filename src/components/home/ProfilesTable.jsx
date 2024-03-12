@@ -2,29 +2,33 @@ import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { BiShow } from 'react-icons/bi';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineDelete } from 'react-icons/md';
 import ProfileModal from './ProfileModal';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-
 
 const ProfilesTable = ({ profiles }) => {
   const [showModal, setShowModal] = useState(false);
+  const [currentProfile, setCurrentProfile] = useState(null);
   const [profilesOfUser, setProfilesOfUser] = useState(null);
-  const searchTerm=localStorage.getItem('email');
-  const searchOption='email'
+  const searchTerm = localStorage.getItem('email');
+  const searchOption = 'email';
+
   useEffect(() => {
     axios.get(`http://localhost:5555/profiles?q=${searchTerm}&option=${searchOption}`)
-    .then((response) => {
-      setProfilesOfUser(response.data.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        setProfilesOfUser(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
-  
-  
+  const handleShowModal = (profile) => {
+    setCurrentProfile(profile);
+    setShowModal(true);
+  };
+
   return (
     <table className='w-full border-separate border-spacing-2'>
       <thead>
@@ -60,7 +64,7 @@ const ProfilesTable = ({ profiles }) => {
                 <button>
                   <BiShow
                     className='text-2xl text-green-600 hover:text-black'
-                    onClick={() => setShowModal(true)}
+                    onClick={() => handleShowModal(profile)}
                   />
                 </button>
                 <Link to={`/profiles/details/${profile._id}`}>
@@ -72,20 +76,18 @@ const ProfilesTable = ({ profiles }) => {
                   </Link>
                 )}
                 {profilesOfUser && profilesOfUser.some((b) => b.email === profile.email) && (
-
-                <Link to={`/profiles/delete/${profile._id}`}>
-                  <MdOutlineDelete className='text-2xl text-red-600 hover:text-black' />
-                </Link>
+                  <Link to={`/profiles/delete/${profile._id}`}>
+                    <MdOutlineDelete className='text-2xl text-red-600 hover:text-black' />
+                  </Link>
                 )}
-
               </div>
             </td>
-            {showModal && (
-              <ProfileModal profile={profile} onClose={() => setShowModal(false)} />
-            )}
           </tr>
         ))}
       </tbody>
+      {showModal && (
+        <ProfileModal profile={currentProfile} onClose={() => setShowModal(false)} />
+      )}
     </table>
   );
 };
