@@ -3,7 +3,7 @@ import { assert } from 'chai'; // Import assert function from Chai
 
 
 describe("unique Email test",function(){
-    it("unique email test success",async function(){
+    it("unique email test",async function(){
         let driver = await new Builder().forBrowser(Browser.CHROME).build();
         await driver.get('http://localhost:5173/');
         await driver.findElement(By.linkText('Register')).click();

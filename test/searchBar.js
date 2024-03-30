@@ -3,7 +3,7 @@ import { assert } from 'chai'; // Import assert function from Chai
 
 
 describe("search bar test",function(){
-    it("search bar test success",async function(){
+    it("search bar test",async function(){
         let driver = await new Builder().forBrowser(Browser.CHROME).build();
         await driver.get('http://localhost:5173/');
         await driver.findElement(By.css('.search-input')).sendKeys('hen');
