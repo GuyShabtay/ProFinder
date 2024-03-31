@@ -1,7 +1,6 @@
 import { Builder, By, Key, until,Browser } from 'selenium-webdriver';
 import { assert } from 'chai'; // Import assert function from Chai
 
-//NOT FINISH
 
 
 function sleep(milliseconds) {
@@ -24,14 +23,14 @@ describe("deleteProfile test",function(){
         await driver.findElement(By.css('.btn.btn-success')).click();
         await driver.wait(until.urlIs('http://localhost:5173/'), 3000);
 
-        
-        await driver.findElement(By.css(".text-2xl.text-red-600.hover\\:text-black")).click();
-
+        const svgButton = await driver.wait(until.elementLocated(By.css("svg.text-2xl.text-red-600.hover\\:text-black")), 10000);
+        await svgButton.click();
         sleep(1000);
+        await driver.findElement(By.className('p-4 bg-red-600 text-white m-8 w-full')).click();
 
         
         // Close the browser
-        //await driver.quit();
+        await driver.quit();
 
  
 
