@@ -41,7 +41,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-right">
         {authenticated ? (
-          <button onClick={handleSignOut}>Sign Out</button>
+          <button onClick={handleSignOut}>Log out</button>
         ) : (
           <>
             <Link to="/LoginPage">
