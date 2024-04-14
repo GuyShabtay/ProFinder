@@ -11,7 +11,6 @@ function sleep(milliseconds) {
     }
   }
 
-
 describe("add profile test",function(){
     it("add profile test",async function(){
         let driver = await new Builder().forBrowser(Browser.CHROME).build();
