@@ -48,7 +48,7 @@ describe("add profile test",function(){
         assert.equal(currentUrl, 'http://localhost:5173/', 'Expected URL does not match actual URL');
         
         // Close the browser
-        //await driver.quit();
+        await driver.quit();
 
  
 
