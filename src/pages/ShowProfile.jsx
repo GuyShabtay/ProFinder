@@ -56,6 +56,7 @@ const ShowProfile = () => {
     }
   };
   
+  
 
   const saveComment = () => {
     const newCommentUser = {
@@ -94,6 +95,18 @@ const ShowProfile = () => {
         console.log(error);
       });
   };
+
+  const addCommentToStatistics = () => {
+    const response=axios
+      .post(`http://localhost:5555/profiles/statistics/comments`, {email:email})
+      .then(() => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
 
   const handleInputChange = (event) => {
@@ -202,7 +215,7 @@ const getUserRating = () => {
           value={newComment}
           onChange={handleInputChange}
         />
-        <button onClick={handleAddComment}>
+        <button onClick={() => { handleAddComment(); addCommentToStatistics(); }}>
 
 <BsArrowRight className='arrow-right'/>
         </button>
