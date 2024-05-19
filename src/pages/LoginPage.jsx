@@ -50,7 +50,7 @@ function LoginPage() {
               <label htmlFor="email"><strong>Email</strong></label>
               <input
                 type="text"
-                placeholder="Enter Email"
+                placeholder="Enter Email please"
                 autoComplete="off"
                 name="email"
                 className="form-control"
