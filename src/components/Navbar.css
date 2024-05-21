@@ -25,6 +25,10 @@
   .navbar-right button:hover {
     background-color: #0056b3;
   }
+  .navbar-right .rate-us-btn{
+    background-color: #75a5d8;
+
+  }
   
   .name {
     margin-left: 10px;

@@ -10,6 +10,7 @@ import { useSnackbar } from 'notistack';
 import { BsArrowRight } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
+import RateUserModal from '../components/RateUserModal';
 
 
 
@@ -21,10 +22,14 @@ const ShowProfile = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [savedComment, setSavedComment] = useState('');
+  const [isProfileViewRated, setIsProfileViewRated] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   const { enqueueSnackbar } = useSnackbar();
   const name=localStorage.getItem('name')
   const color=localStorage.getItem('color')
   const email=localStorage.getItem('email')
+  
 
 
 
@@ -40,7 +45,29 @@ const ShowProfile = () => {
         console.log(error);
         setLoading(false);
       });
+      checkIsProfileViewRated();
+
   }, [id]); 
+
+
+  const checkIsProfileViewRated = () => {
+    axios
+      .put(`http://localhost:5555/profiles/statistics/profile-viewRating/user`, {email})
+      .then((response) => {
+        if(response.data.message==='true')
+         { 
+          setIsProfileViewRated(true)}
+        else {
+          setTimeout(() => {
+                setShowModal(true);
+         
+        }, 2000);
+          setIsProfileViewRated(false);}
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   
   const handleSubmit = () => {
@@ -51,7 +78,7 @@ const ShowProfile = () => {
       return;
     }
       saveRating();
-      window.location.reload();
+      // window.location.reload();
 
     }
   };
@@ -69,7 +96,10 @@ const ShowProfile = () => {
       .put(`http://localhost:5555/profiles/comment/${id}`, newCommentUser)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('Profile Edited successfully', { variant: 'success' });
+        // window.location.reload();
+        
+
+
       })
       .catch((error) => {
         setLoading(false);
@@ -87,7 +117,8 @@ const ShowProfile = () => {
       .put(`http://localhost:5555/profiles/rating/${id}`, newRatedUser)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('Profile Edited successfully', { variant: 'success' });
+        // enqueueSnackbar('Profile Edited successfully', { variant: 'success' });
+        
       })
       .catch((error) => {
         setLoading(false);
@@ -106,6 +137,16 @@ const ShowProfile = () => {
         console.log(error);
       });
   };
+  const addRatingToStatistics = () => {
+    const response=axios
+      .post(`http://localhost:5555/profiles/statistics/ratings`, {email:email})
+      .then(() => {
+        ///console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
 
 
@@ -119,19 +160,11 @@ const ShowProfile = () => {
       setComments([...comments, newComment]);
       setNewComment('');
       saveComment();
-      window.location.reload();
-
     }
-  };
-
-  
-  const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+    else if(!email){
+          enqueueSnackbar('Only registered users can rate', { variant: 'error' });
+          return;
     }
-    return color;
   };
 
 
@@ -181,7 +214,7 @@ const getUserRating = () => {
             <div style={{ display: 'flex' }}>
             <span className='mr-3'>Rate this professional:</span>
               <StarRating rating={rating} setRating={setRating} />
-              <button className='submit-btn' onClick={handleSubmit}>
+              <button className='submit-btn' onClick={() => { handleSubmit(); addRatingToStatistics(); }}>
                 Submit
               </button>
               
@@ -235,6 +268,9 @@ const getUserRating = () => {
         )}
        
       </div>
+      {/*showModal && (
+        <RateUserModal ratingSubject={'profile-view'} onClose={() => setShowModal(false)} />
+      )*/}
     </div>
   );
 };
