@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import RateUserModal from '../components/RateUserModal'
+import axios from 'axios';
 
 const Navbar = () => {
   const location = useLocation();
   const isLoggedIn = location.pathname !== "/LoginPage"; 
   const [authenticated, setAuthenticated] = useState(false);
   const [username, setUsername] = useState(""); 
+  const [showModal, setShowModal] = useState(false);
+  const [isOverallRated, setIsOverallRated] = useState(false);
+  const email=localStorage.email;
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -15,8 +21,23 @@ const Navbar = () => {
       setAuthenticated(true);
       const storedUsername = localStorage.getItem('name');
       setUsername(storedUsername);
+      checkIsOverallRated();
     }
   }, []);
+
+  const checkIsOverallRated = () => {
+    axios
+      .put(`http://localhost:5555/profiles/statistics/overallRating/user`, {email})
+      .then((response) => {
+        if(response.data.message==='true')
+          setIsOverallRated(true)
+        else setIsOverallRated(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  
 
   const handleSignOut = () => {
     localStorage.removeItem('token');
@@ -40,6 +61,8 @@ const Navbar = () => {
         <h1>{authenticated && <span className="username">Hello, {username}</span>}</h1>
       </div>
       <div className="navbar-right">
+      {!isOverallRated && <button className='rate-us-btn' onClick={()=>{setShowModal(true)}}>Rate Us</button>}
+      
         {authenticated ? (
           <button onClick={handleSignOut}>Log out</button>
         ) : (
@@ -53,6 +76,9 @@ const Navbar = () => {
           </>
         )}
       </div>
+      {/*showModal && (
+        <RateUserModal ratingSubject={'overall'} onClose={() => setShowModal(false)} />
+      )*/}
     </nav>
   );
 };

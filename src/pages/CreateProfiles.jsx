@@ -38,6 +38,17 @@ const CreateProfiles = () => {
       });
   };
 
+  const addProfileToStatistics = () => {
+    const response=axios
+      .post(`http://localhost:5555/profiles/statistics/profilesToUsersRatio`)
+      .then(() => {
+        ///console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className='p-4'>
       <BackButton />
@@ -71,7 +82,8 @@ const CreateProfiles = () => {
             className='border-2 border-gray-500 px-4 py-2  w-full '
           />
         </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveProfile}>
+
+        <button className='p-2 bg-sky-300 m-8' onClick={() => { handleSaveProfile(); addProfileToStatistics(); }}>
           Save
         </button>
       </div>

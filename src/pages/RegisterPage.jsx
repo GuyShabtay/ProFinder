@@ -23,6 +23,7 @@ function RegisterPage() {
         .then(result => {
             console.log(result);
             navigate("/LoginPage");
+            addUserToStatistics();
         })
         .catch(err => {
             console.log(err);
@@ -40,7 +41,16 @@ function RegisterPage() {
 
       const color=getRandomColor();
 
-
+      const addUserToStatistics = () => {
+        const response=axios
+          .post(`http://localhost:5555/profiles/statistics/profilesToUsersRatio`)
+          .then(() => {
+            ///console.log(response.data)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
 
   return (
     <div>
@@ -48,7 +58,7 @@ function RegisterPage() {
         <div className="signup-container">
             <div className="signup-form">
                 <h2>Sign Up</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={ handleSubmit }>
                     <div className="mb-3">
                         <label htmlFor="name"><strong>Name</strong></label>
                         <input

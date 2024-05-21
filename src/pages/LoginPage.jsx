@@ -5,38 +5,61 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSnackbar } from 'notistack';
+import RateUserModal from '../components/RateUserModal';
 
 
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(0);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-
   axios.defaults.withCredentials=true;
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post("http://localhost:5555/profiles/login", { email, password })
-      .then(result => {
-        console.log(result);
-        if (result.data.message === "Success") {
-          localStorage.setItem('token', result.data.token);
-          localStorage.setItem('name', result.data.username);
-          localStorage.setItem('email', result.data.email);
-          localStorage.setItem('color', result.data.color);
-          navigate("/",{ state: { name: result.data.username } });
-        } else {
-          navigate("/register");
-          alert("You are not registered to this service");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        enqueueSnackbar('Error', { variant: 'error' });
-      });
+
+  
+  const checkIsLoginRated = async () => {
+    try {
+      const response = await axios.put(`http://localhost:5555/profiles/statistics/loginRating/user`, { email });
+      console.log('response', response);
+      return response.data.message === 'true';
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const result = await axios.post("http://localhost:5555/profiles/login", { email, password });
+  
+      if (result.data.message === "Success") {
+        localStorage.setItem('token', result.data.token);
+        localStorage.setItem('name', result.data.username);
+        localStorage.setItem('email', result.data.email);
+        localStorage.setItem('color', result.data.color);
+  
+        const isLoginRated = await checkIsLoginRated();
+        
+        if (showModal === 0 && !isLoginRated) {
+          setShowModal(prevShowModal => prevShowModal + 1);
+        } else {
+          navigate("/", { state: { name: result.data.username } });
+        }
+      } else {
+        navigate("/register");
+        alert("You are not registered to this service");
+      }
+    } catch (err) {
+      console.log(err);
+      enqueueSnackbar('Error', { variant: 'error' });
+    }
+  };
+  
+
   
 
   return (
@@ -75,6 +98,9 @@ function LoginPage() {
           <Link to="/RegisterPage" className="btn btn-light border">Sign Up</Link>
         </div>
       </div>
+      {/*showModal && (
+        <RateUserModal ratingSubject={'login'} onClose={() => setShowModal(false)} />
+      )*/}
     </div>
   );
 }
