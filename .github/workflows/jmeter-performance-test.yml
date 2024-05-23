@@ -1,0 +1,51 @@
+name: JMeter Performance Test
+
+on: 
+  push:
+    branches:
+      - main  # or your specific branch
+  pull_request:
+    branches:
+      - main  # or your specific branch
+  schedule:
+    - cron: '0 3 * * *'  # Run daily at 3 AM
+
+jobs:
+  performance-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
+      with:
+        java-version: '8'
+
+    - name: Install JMeter
+      run: |
+        wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.4.1.tgz
+        tar -xzf apache-jmeter-5.4.1.tgz
+        mv apache-jmeter-5.4.1 /opt/jmeter
+        export PATH=$PATH:/opt/jmeter/bin
+
+    - name: Run JMeter Tests
+      uses: QAInsights/PerfAction@v3.1
+      with:
+        test-plan-path: jmeter-files/test-plan.jmx
+        args: ''
+
+    - name: Upload JMeter Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: jmeter-results
+        path: result.jtl
+
+    - name: Analyze Results with Latency Lingo
+      uses: latency-lingo/github-action@v0.0.2
+      with:
+        api-key: ${{ secrets.LATENCY_LINGO_API_KEY }}
+        file: result.jtl
+        label: Checkout Flow Automated Test Plan
+        format: jmeter
