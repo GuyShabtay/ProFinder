@@ -5,10 +5,8 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 
-const publicUrl = "https://profinder-vzbv.onrender.com";
-
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename={publicUrl}>
+  <BrowserRouter>
     <SnackbarProvider>
       <App />
     </SnackbarProvider>
