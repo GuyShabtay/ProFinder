@@ -2,14 +2,14 @@
   "stats": {
     "suites": 1,
     "tests": 1,
-    "passes": 0,
+    "passes": 1,
     "pending": 0,
-    "failures": 1,
-    "start": "2024-05-25T11:37:46.739Z",
-    "end": "2024-05-25T11:37:47.991Z",
-    "duration": 1252,
+    "failures": 0,
+    "start": "2024-05-25T14:04:09.525Z",
+    "end": "2024-05-25T14:04:13.720Z",
+    "duration": 4195,
     "testsRegistered": 1,
-    "passPercent": 0,
+    "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "416fbbff-e56f-4d86-8315-58f61c7a1eae",
+      "uuid": "56a6c3ff-8af6-4090-a038-84f1d45f8369",
       "title": "",
       "fullFile": "C:\\Users\\Adir\\Desktop\\ProFinder\\ProFinder-frontend\\test\\writeComment.js",
       "file": "\\test\\writeComment.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "70198dad-1cf4-46a4-8d4a-aa3678584325",
+          "uuid": "7a79e52d-0ea4-45a2-b7f0-f5699c05ba0b",
           "title": "wtire comment test",
           "fullFile": "C:\\Users\\Adir\\Desktop\\ProFinder\\ProFinder-frontend\\test\\writeComment.js",
           "file": "\\test\\writeComment.js",
@@ -38,33 +38,29 @@
               "title": "comment test",
               "fullTitle": "wtire comment test comment test",
               "timedOut": false,
-              "duration": 1244,
-              "state": "failed",
-              "speed": null,
-              "pass": false,
-              "fail": true,
+              "duration": 4185,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
               "pending": false,
               "context": null,
-              "code": "let driver = await new Builder().forBrowser(Browser.CHROME).build();\nawait driver.get('http://localhost:5173/');\nawait driver.findElement(By.linkText('Login')).click();\nawait driver.findElement(By.name('email')).sendKeys('adir@gmail.com');\nawait driver.findElement(By.name('password')).sendKeys('123');\n//await driver.findElement(By.css('.btn.btn-success')).click();\nconst button = await driver.findElement(By.css('.btn.btn-success'));\nbutton.click();\nsleep(1000);\nbutton.click();\nawait driver.wait(until.urlIs('http://localhost:5173/'), 3000);\nconst svgButton = await driver.wait(until.elementLocated(By.css(\"svg.text-2xl.text-blue-600.hover\\\\:text-black\")), 10000);\nawait svgButton.click();\nsleep(1000);\n// Get the current URL\nconst currentUrl = await driver.getCurrentUrl();\n// Assert if the current URL matches the expected URL\nassert.equal(currentUrl, 'http://localhost:5173/', 'Expected URL does not match actual URL');\n\n// Close the browser\nawait driver.quit();",
-              "err": {
-                "message": "ReferenceError: sleep is not defined",
-                "estack": "ReferenceError: sleep is not defined\n    at Context.<anonymous> (file:///C:/Users/Adir/Desktop/ProFinder/ProFinder-frontend/test/writeComment.js:15:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
-                "diff": null
-              },
-              "uuid": "3eb2f5a6-c18a-4742-8fa6-6328c864bb62",
-              "parentUUID": "70198dad-1cf4-46a4-8d4a-aa3678584325",
+              "code": "let driver = await new Builder().forBrowser(Browser.CHROME).build();\nawait driver.get('http://localhost:5173/');\nawait driver.findElement(By.linkText('Login')).click();\nawait driver.findElement(By.name('email')).sendKeys('adir@gmail.com');\nawait driver.findElement(By.name('password')).sendKeys('123');\nawait driver.findElement(By.css('.btn.btn-success')).click();\nawait driver.sleep(1000); // TODO delete this row\nawait driver.findElement(By.css('.btn.btn-success')).click();// TODO delete this row\nconst button = await driver.findElement(By.css('.btn.btn-success'));\nawait driver.wait(until.urlIs('http://localhost:5173/'), 3000);\nconst svgButton = await driver.wait(until.elementLocated(By.css(\"svg.text-2xl.text-blue-600.hover\\\\:text-black\")), 10000);\nawait svgButton.click();\n// Locate the textarea element\nawait driver.sleep(1000); // TODO delete this row\nconst textarea = await driver.findElement(By.css('textarea[placeholder=\"Write a comment...\"]'));\n// Write a comment into the textarea\nawait textarea.sendKeys('This is my comment.');\nconst svgButton2 = await driver.findElement(By.css('svg.arrow-right'));\nawait svgButton2.click();\n// Close the browser\nawait driver.quit();",
+              "err": {},
+              "uuid": "e22ed76b-2635-4307-b451-e5fa242b8340",
+              "parentUUID": "7a79e52d-0ea4-45a2-b7f0-f5699c05ba0b",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
-          "passes": [],
-          "failures": [
-            "3eb2f5a6-c18a-4742-8fa6-6328c864bb62"
+          "passes": [
+            "e22ed76b-2635-4307-b451-e5fa242b8340"
           ],
+          "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 1244,
+          "duration": 4185,
           "root": false,
           "rootEmpty": false,
           "_timeout": 0

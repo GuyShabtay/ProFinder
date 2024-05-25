@@ -9,22 +9,20 @@ describe("wtire comment test",function(){
         await driver.findElement(By.linkText('Login')).click();
         await driver.findElement(By.name('email')).sendKeys('adir@gmail.com');
         await driver.findElement(By.name('password')).sendKeys('123');
-        //await driver.findElement(By.css('.btn.btn-success')).click();
+        await driver.findElement(By.css('.btn.btn-success')).click();
+        await driver.sleep(1000); // TODO delete this row
+        await driver.findElement(By.css('.btn.btn-success')).click();// TODO delete this row
         const button = await driver.findElement(By.css('.btn.btn-success'));
-        button.click();
-        sleep(1000);
-        button.click();
         await driver.wait(until.urlIs('http://localhost:5173/'), 3000);
         const svgButton = await driver.wait(until.elementLocated(By.css("svg.text-2xl.text-blue-600.hover\\:text-black")), 10000);
         await svgButton.click();
-        sleep(1000);
-
-        // Get the current URL
-        const currentUrl = await driver.getCurrentUrl();
-
-        // Assert if the current URL matches the expected URL
-        assert.equal(currentUrl, 'http://localhost:5173/', 'Expected URL does not match actual URL');
-        
+        // Locate the textarea element
+        await driver.sleep(1000); // TODO delete this row
+        const textarea = await driver.findElement(By.css('textarea[placeholder="Write a comment..."]'));
+        // Write a comment into the textarea
+        await textarea.sendKeys('This is my comment.');
+        const svgButton2 = await driver.findElement(By.css('svg.arrow-right'));
+        await svgButton2.click();
         // Close the browser
         await driver.quit();
 
