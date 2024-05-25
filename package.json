@@ -13,7 +13,8 @@
     "test:chrome": "cypress run --browser chrome",
     "test:firefox": "cypress run --browser firefox",
     "test:edge": "cypress run --browser edge",
-    "test:all": "npm run test:chrome && npm run test:firefox && npm run test:edge"
+    "test:all": "npm run test:chrome && npm run test:firefox && npm run test:edge",
+    "test:file": "mocha --no-timeouts --reporter mochawesome --require mochawesome/register"
   },
   "dependencies": {
     "axios": "^1.4.0",
