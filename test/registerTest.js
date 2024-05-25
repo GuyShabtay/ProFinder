@@ -8,9 +8,10 @@ describe("register test",function(){
         await driver.get('http://localhost:5173/');
         await driver.findElement(By.linkText('Register')).click();
         await driver.findElement(By.name('name')).sendKeys('example');
-        await driver.findElement(By.name('email')).sendKeys('example@gmail.com');
+        await driver.findElement(By.name('email')).sendKeys('example222@gmail.com');
         await driver.findElement(By.name('password')).sendKeys('123456');
         await driver.findElement(By.css('.btn.btn-success')).click();
+        
 
 
         await driver.wait(until.urlIs('http://localhost:5173/LoginPage'), 3000);
