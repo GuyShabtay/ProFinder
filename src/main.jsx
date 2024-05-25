@@ -8,9 +8,9 @@ import { SnackbarProvider } from 'notistack';
 //const publicUrl = "https://profinder-vzbv.onrender.com";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <HashRouter>
+  <BrowserRouter>
     <SnackbarProvider>
       <App />
     </SnackbarProvider>
-  </HashRouter>
+  </BrowserRouter>
 );

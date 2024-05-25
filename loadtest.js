@@ -19,16 +19,19 @@ export default function () {
   sleep(1); // 1 second sleep between iterations
 
 
-  // let signUpPageRes = http.get('https://profinder-vzbv.onrender.com/RegisterPage');
-  // check(signUpPageRes, {
-  //   'Registertion Page page status is 200': (r) => r.status === 200,
-  // });
-  // sleep(1);
+  let signUpPageRes = http.get('https://profinder-vzbv.onrender.com/#/RegisterPage');
+  check(signUpPageRes, {
+    'Registertion Page page status is 200': (r) => r.status === 200,
+  });
+  sleep(1);
 
 
-  // let loginPageRes = http.get('https://profinder-vzbv.onrender.com/LoginPage');
-  // check(loginPageRes, {
-  //   'login page status is 200': (r) => r.status === 200,
-  // });
-  // sleep(1);
+  let loginPageRes = http.get('https://profinder-vzbv.onrender.com/#/LoginPage');
+  check(loginPageRes, {
+    'login page status is 200': (r) => r.status === 200,
+  });
+  sleep(1);
 }
+
+
+

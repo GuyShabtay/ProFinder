@@ -20,7 +20,10 @@ describe("edit Phone test",function(){
         await driver.findElement(By.name('email')).sendKeys('adir@gmail.com');
         await driver.findElement(By.name('password')).sendKeys('123');
         await driver.findElement(By.css('.btn.btn-success')).click();
+        await driver.sleep(1000); // TODO delete this row
+        await driver.findElement(By.css('.btn.btn-success')).click();// TODO delete this row
         await driver.wait(until.urlIs('http://localhost:5173/'), 3000);
+        
 
 
         const svgButton = await driver.wait(until.elementLocated(By.css("svg.text-2xl.text-yellow-600.hover\\:text-black")), 10000);
