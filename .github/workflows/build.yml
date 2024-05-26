@@ -1,7 +1,6 @@
 on:
   push:
       
-
 jobs:
   npm_install:
     name: Install dependencies
@@ -16,13 +15,11 @@ jobs:
       with:
         node-version: '14'  # Adjust the Node.js version as needed
 
-   - name: Install dependencies
+    - name: Install dependencies
       run: npm install
 
     - name: Install k6
-      run: sudo apt-get install -y k6
+      run: choco install k6
 
     - name: Run load test
       run: k6 run loadtest.js
-
-  
