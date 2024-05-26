@@ -18,6 +18,15 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Start the server
+      run: npm start &
+
+    - name: Wait for server to be ready
+      run: sleep 10  # Adjust the sleep time as needed to ensure the server is ready
+
+    - name: Run Cypress tests
+      run: npm run cypress:run  # Replace with your actual Cypress command
+
     - name: Run Compatibility tests
       run: npm run test:all
 
