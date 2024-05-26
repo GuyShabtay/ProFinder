@@ -10,7 +10,7 @@ import ProfilesCard from '../components/home/ProfilesCard';
 import BottomNavbar from '../components/home/BottomNavbar';
 import Navbar from '../components/Navbar'
 import SearchBar from '../components/SearchBar';
-import './Home.css'
+import './Home.css';
 
 const Home = () => {
   const [profiles, setProfiles] = useState([]);
@@ -46,7 +46,6 @@ const Home = () => {
         setLoading(false);
       });
 };
-
 
   return (
     <div className='main-background-image'>
