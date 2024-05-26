@@ -78,7 +78,7 @@ const ShowProfile = () => {
       return;
     }
       saveRating();
-      // window.location.reload();
+      window.location.reload();
 
     }
   };
@@ -96,7 +96,7 @@ const ShowProfile = () => {
       .put(`http://localhost:5555/profiles/comment/${id}`, newCommentUser)
       .then(() => {
         setLoading(false);
-        // window.location.reload();
+        window.location.reload();
         
 
 
