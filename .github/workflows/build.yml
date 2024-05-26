@@ -26,7 +26,7 @@ jobs:
         - name: Run k6 cloud test
           uses: grafana/k6-action@v0.3.1
           with:
-            filename: my-load-test.js
+            filename: loadtest.js
             flags: --vus 50 --duration 10s
             cloud: true
             token: ${{ secrets.K6_CLOUD_API_TOKEN }}
