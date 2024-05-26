@@ -1,9 +1,9 @@
 on:
   push:
-      
+
 jobs:
-  npm_install:
-    name: Install dependencies
+  npm_install_and_k6:
+    name: Install dependencies and run k6 test
     runs-on: ubuntu-latest
 
     steps:
@@ -18,15 +18,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run k6 test
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        - name: Run k6 cloud test
-          uses: grafana/k6-action@v0.3.1
-          with:
-            filename: loadtest.js
-            flags: --vus 50 --duration 10s
-            cloud: true
-            token: ${{ secrets.K6_CLOUD_API_TOKEN }}
+    - name: Run k6 cloud test
+      uses: grafana/k6-action@v0.3.1
+      with:
+        filename: loadtest.js
+        flags: --vus 50 --duration 10s
+        cloud: true
+        token: ${{ secrets.K6_CLOUD_API_TOKEN }}
