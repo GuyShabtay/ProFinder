@@ -18,7 +18,13 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run k6 local test
+    - name: Run Compatibility tests
+      run: npm run test:all
+
+    - name: Run performence tests
+      run: node lighthouse-audit.js
+
+    - name: Run load tests
       uses: grafana/k6-action@v0.3.1
       with:
         filename: loadtest.js

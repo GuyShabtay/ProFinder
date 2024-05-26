@@ -61,7 +61,7 @@ const ShowProfile = () => {
           setTimeout(() => {
                 setShowModal(true);
          
-        }, 2000);
+        }, 3000);
           setIsProfileViewRated(false);}
       })
       .catch((error) => {
@@ -268,9 +268,9 @@ const getUserRating = () => {
         )}
        
       </div>
-      {/*showModal && (
+      {showModal && (
         <RateUserModal ratingSubject={'profile-view'} onClose={() => setShowModal(false)} />
-      )*/}
+      )}
     </div>
   );
 };

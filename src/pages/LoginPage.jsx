@@ -98,9 +98,9 @@ function LoginPage() {
           <Link to="/RegisterPage" className="btn btn-light border">Sign Up</Link>
         </div>
       </div>
-      {/*showModal && (
+      {showModal && (
         <RateUserModal ratingSubject={'login'} onClose={() => setShowModal(false)} />
-      )*/}
+      )}
     </div>
   );
 }
