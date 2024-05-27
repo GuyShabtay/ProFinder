@@ -18,7 +18,6 @@ export default function () {
   });
   sleep(1); // 1 second sleep between iterations
 
-
   let signUpPageRes = http.get('https://profinder-vzbv.onrender.com/#/RegisterPage');
   check(signUpPageRes, {
     'Registertion Page page status is 200': (r) => r.status === 200,
