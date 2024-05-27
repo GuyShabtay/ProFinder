@@ -19,9 +19,9 @@ describe('GET request test', function () {
     });
 
     it('should navigate to the specified site and verify the URL', async function () {
-        await driver.get('https://profinder-vzbv.onrender.com/');
+        await driver.get('http://localhost:5173/');
         let url = await driver.getCurrentUrl();
-        if (url !== 'https://profinder-vzbv.onrender.com/') {
+        if (url !== 'http://localhost:5173/') {
             throw new Error(`error`);
         }
     });
