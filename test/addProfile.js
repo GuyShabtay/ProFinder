@@ -1,5 +1,10 @@
 import { Builder, By, Key, until,Browser } from 'selenium-webdriver';
 import { assert } from 'chai'; // Import assert function from Chai
+// Example test file
+const driver = require('./webdriver');
+
+// Your test code using the 'driver' object
+
 
 
 function sleep(milliseconds) {
@@ -13,7 +18,7 @@ function sleep(milliseconds) {
 
 describe("add profile test",function(){
     it("add profile test",async function(){
-        let driver = await new Builder().forBrowser(Browser.CHROME).build();
+        // let driver = await new Builder().forBrowser(Browser.CHROME).build();
         await driver.get('http://localhost:5173/');
         await driver.findElement(By.linkText('Login')).click();
         await driver.findElement(By.name('email')).sendKeys('adir@gmail.com');
