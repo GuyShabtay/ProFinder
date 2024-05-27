@@ -18,27 +18,25 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Install Google Chrome
-      run: sudo apt-get install -y google-chrome-stable
-
     - name: Start the server
       run: npm start &
 
     - name: Wait for server to be ready
       run: sleep 10  # Adjust the sleep time as needed to ensure the server is ready
 
-    - name: Run web driver tests
-      run: |
-        # Set the CHROME_BIN environment variable
-        export CHROME_BIN=/usr/bin/google-chrome
-        # Run the tests
-        npm test
-      env:
-        # Ensure the necessary environment variables are set
-        DISPLAY: ":99.0"
+    # - name: Run Compatibility tests
+    #   run: npm run test:all
 
-    - name: Run performance tests
+    - name: Run performence tests
       run: node lighthouse-audit.js
+
+    - name: Run in development mode
+      run: npm run dev
+
+    - name: Run web driver tests
+      run: npm test
+
+    
 
     - name: Run load tests
       uses: grafana/k6-action@v0.3.1
