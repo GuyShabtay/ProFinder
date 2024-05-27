@@ -1,7 +1,7 @@
 import { Builder, By, Key, until,Browser } from 'selenium-webdriver';
 import { assert } from 'chai'; // Import assert function from Chai
 // Example test file
-const driver = require('./webdriver');
+import driver from './webdriver.js';
 
 // Your test code using the 'driver' object
 
