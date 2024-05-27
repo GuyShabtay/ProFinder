@@ -1,5 +1,8 @@
 name: NPM Audit
-on: [push]
+on:
+  push:
+    branches:
+      - release
 jobs:
   npm-audit:
     runs-on: ubuntu-latest
