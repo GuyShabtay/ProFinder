@@ -21,7 +21,7 @@ function LoginPage() {
   
   const checkIsLoginRated = async () => {
     try {
-      const response = await axios.put(`http://localhost:5555/profiles/statistics/loginRating/user`, { email });
+      const response = await axios.put(`https://profinder-vzbv.onrender.com/profiles/statistics/loginRating/user`, { email });
       console.log('response', response);
       return response.data.message === 'true';
     } catch (error) {
@@ -34,7 +34,7 @@ function LoginPage() {
     e.preventDefault();
   
     try {
-      const result = await axios.post("http://localhost:5555/profiles/login", { email, password });
+      const result = await axios.post("https://profinder-vzbv.onrender.com/profiles/login", { email, password });
   
       if (result.data.message === "Success") {
         localStorage.setItem('token', result.data.token);
