@@ -1,7 +1,7 @@
 // webdriver.js
 
-const { Builder } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
+import { Builder } from 'selenium-webdriver';
+import chrome from 'selenium-webdriver/chrome';
 
 // Set Chrome options
 let chromeOptions = new chrome.Options();
