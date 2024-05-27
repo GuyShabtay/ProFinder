@@ -61,7 +61,7 @@ const Navbar = () => {
         <h1>{authenticated && <span className="username">Hello, {username}</span>}</h1>
       </div>
       <div className="navbar-right">
-      {!isOverallRated && <button className='rate-us-btn' onClick={()=>{setShowModal(true)}}>Rate Us</button>}
+      {/*!isOverallRated && <button className='rate-us-btn' onClick={()=>{setShowModal(true)}}>Rate Us</button>*/}
       
         {authenticated ? (
           <button onClick={handleSignOut}>Log out</button>
