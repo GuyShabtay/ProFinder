@@ -1,10 +1,20 @@
-import { Builder, By, Key, until,Browser } from 'selenium-webdriver';
-import { assert } from 'chai'; // Import assert function from Chai
+import { Builder, By, until } from 'selenium-webdriver';
+import chrome from 'selenium-webdriver/chrome.js';
+
+let options = new chrome.Options();
+options.addArguments('headless');
+options.addArguments('no-sandbox');
+options.addArguments('disable-dev-shm-usage');
+
+let driver = new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build();
 
 
 describe("login test",function(){
     it("login test",async function(){
-        let driver = await new Builder().forBrowser(Browser.CHROME).build();
+        // let driver = await new Builder().forBrowser(Browser.CHROME).build();
         await driver.get('http://localhost:5173/');
         await driver.findElement(By.linkText('Login')).click();
         await driver.findElement(By.name('email')).sendKeys('adir@gmail.com');
