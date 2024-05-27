@@ -16,4 +16,4 @@ const driver = new Builder()
     .build();
 
 // Export the driver so it can be used in other files
-module.exports = driver;
+export default driver;
