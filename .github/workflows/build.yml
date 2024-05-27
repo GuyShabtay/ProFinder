@@ -25,23 +25,20 @@ jobs:
       run: npm run dev &
 
     - name: Wait for server to be ready
-      run: sleep 10  # Adjust the sleep time as needed to ensure the server is ready
+      run: sleep 10 
 
-    # - name: Run Selenium Tests
-    #   run: npx selenium-side-runner ProFinder.side
+    - name: Run Compatibility tests
+      run: npm run test:all
 
-    # - name: Run Compatibility tests
-    #   run: npm run test:all
-
-    - name: Run web driver tests
-      run: |
-        # Set the CHROME_BIN environment variable
-        #export CHROME_BIN=/usr/bin/google-chrome
-        # Run the tests
-        npm test
-      env:
-        # Ensure the necessary environment variables are set
-        DISPLAY: ":99.0"
+    # - name: Run web driver tests
+    #   run: |
+    #     # Set the CHROME_BIN environment variable
+    #     #export CHROME_BIN=/usr/bin/google-chrome
+    #     # Run the tests
+    #     npm test
+    #   env:
+    #     # Ensure the necessary environment variables are set
+    #     DISPLAY: ":99.0"
 
     - name: Run performance tests
       run: node lighthouse-audit.js

@@ -1,21 +1,11 @@
-import { Builder, By, until } from 'selenium-webdriver';
-import chrome from 'selenium-webdriver/chrome.js';
-
-let options = new chrome.Options();
-options.addArguments('headless');
-options.addArguments('no-sandbox');
-options.addArguments('disable-dev-shm-usage');
-
-let driver = new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(options)
-    .build();
+import { Builder, By, Key, until,Browser } from 'selenium-webdriver';
+import { assert } from 'chai'; // Import assert function from Chai
 
 
 describe("login test",function(){
     it("login test",async function(){
-        // let driver = await new Builder().forBrowser(Browser.CHROME).build();
-        await driver.get('https://profinder-vzbv.onrender.com/');
+        let driver = await new Builder().forBrowser(Browser.CHROME).build();
+        await driver.get('http://localhost:5173/');
         await driver.findElement(By.linkText('Login')).click();
         await driver.findElement(By.name('email')).sendKeys('adir@gmail.com');
         await driver.findElement(By.name('password')).sendKeys('123');
@@ -26,13 +16,13 @@ describe("login test",function(){
         
             
 
-        await driver.wait(until.urlIs('https://profinder-vzbv.onrender.com/'), 10000);
+        await driver.wait(until.urlIs('http://localhost:5173/'), 10000);
 
         // Get the current URL
         const currentUrl = await driver.getCurrentUrl();
 
         // Assert if the current URL matches the expected URL
-        assert.equal(currentUrl, 'https://profinder-vzbv.onrender.com/', 'Expected URL does not match actual URL');
+        assert.equal(currentUrl, 'http://localhost:5173/', 'Expected URL does not match actual URL');
         
         // Close the browser
         await driver.quit();
