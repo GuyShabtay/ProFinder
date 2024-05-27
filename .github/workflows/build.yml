@@ -36,7 +36,7 @@ jobs:
     - name: Run web driver tests
       run: |
         # Set the CHROME_BIN environment variable
-        #export CHROME_BIN=/usr/bin/google-chrome
+        export CHROME_BIN=/usr/bin/google-chrome
         # Run the tests
         npm test
       env:
