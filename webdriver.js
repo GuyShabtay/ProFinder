@@ -1,19 +1,25 @@
-// webdriver.js
+const { Builder, By, Key, until } = require('selenium-webdriver');
 
-import { Builder } from 'selenium-webdriver';
-import chrome from 'selenium-webdriver/chrome';
+async function runTests() {
+    // Set up Chrome WebDriver
+    const driver = await new Builder().forBrowser('chrome').build();
 
-// Set Chrome options
-let chromeOptions = new chrome.Options();
-chromeOptions.addArguments('--headless');
-chromeOptions.addArguments('--no-sandbox');
-chromeOptions.addArguments('--disable-dev-shm-usage');
+    try {
+        // Navigate to your app's URL
+        await driver.get('http://localhost:5173/');
 
-// Initialize ChromeDriver with options
-const driver = new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(chromeOptions)
-    .build();
+        // Your Selenium test commands go here
+        // For example:
+        // await driver.findElement(By.css('.navbar-right > button')).click();
 
-// Export the driver so it can be used in other files
-export default driver;
+        // Wait for tests to complete
+        await driver.sleep(2000); // Adjust sleep time as needed
+
+    } finally {
+        // Close the WebDriver session
+        await driver.quit();
+    }
+}
+
+// Run the tests
+runTests();
