@@ -76,9 +76,9 @@ const Navbar = () => {
           </>
         )}
       </div>
-      {/*showModal && (
+      {showModal && (
         <RateUserModal ratingSubject={'overall'} onClose={() => setShowModal(false)} />
-      )*/}
+      )}
     </nav>
   );
 };

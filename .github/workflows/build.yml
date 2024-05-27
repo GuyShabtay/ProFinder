@@ -1,9 +1,9 @@
 on:
   push:
-      
+
 jobs:
-  npm_install:
-    name: Install dependencies
+  npm_install_and_k6:
+    name: Install dependencies and run k6 test
     runs-on: ubuntu-latest
 
     steps:
@@ -13,20 +13,38 @@ jobs:
     - name: Setup Node.js environment
       uses: actions/setup-node@v2
       with:
-        node-version: '14'  # Adjust the Node.js version as needed
+        node-version: '18'  # Adjust the Node.js version as needed
 
     - name: Install dependencies
       run: npm install
 
-    - name: Run k6 test
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        - name: Run k6 cloud test
-          uses: grafana/k6-action@v0.3.1
-          with:
-            filename: loadtest.js
-            flags: --vus 50 --duration 10s
-            cloud: true
-            token: ${{ secrets.K6_CLOUD_API_TOKEN }}
+    - name: Install Google Chrome
+      run: sudo apt-get install -y google-chrome-stable
+
+    - name: Start the server
+      run: npm run dev &
+
+    - name: Wait for server to be ready
+      run: sleep 10 
+
+    - name: Run Compatibility tests
+      run: npm run test:all
+
+    # - name: Run web driver tests
+    #   run: |
+    #     # Set the CHROME_BIN environment variable
+    #     #export CHROME_BIN=/usr/bin/google-chrome
+    #     # Run the tests
+    #     npm test
+    #   env:
+    #     # Ensure the necessary environment variables are set
+    #     DISPLAY: ":99.0"
+
+    - name: Run performance tests
+      run: node lighthouse-audit.js
+
+    - name: Run load tests
+      uses: grafana/k6-action@v0.3.1
+      with:
+        filename: loadtest.js
+        flags: --vus 50 --duration 10s

@@ -20,14 +20,17 @@ function LoginPage() {
 
   
   const checkIsLoginRated = async () => {
-    try {
-      const response = await axios.put(`http://localhost:5555/profiles/statistics/loginRating/user`, { email });
-      console.log('response', response);
-      return response.data.message === 'true';
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    setTimeout(async () => {
+      try {
+        const response = await axios.put(`http://localhost:5555/profiles/statistics/loginRating/user`, { email });
+        console.log('response', response);
+        return response.data.message === 'true';
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+         
+        }, 5000);
   };
   
   const handleSubmit = async (e) => {
