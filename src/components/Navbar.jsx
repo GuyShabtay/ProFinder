@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import RateUserModal from '../components/RateUserModal'
 import axios from 'axios';
-
+//comment
 const Navbar = () => {
   const location = useLocation();
   const isLoggedIn = location.pathname !== "/LoginPage"; 
