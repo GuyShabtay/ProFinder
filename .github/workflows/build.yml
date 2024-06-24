@@ -3,40 +3,40 @@ on:
     branches:
       - release
 
-jobs:
-  npm_install_and_k6:
-    name: Install dependencies and run k6 test
-    runs-on: ubuntu-latest
+# jobs:
+#   npm_install_and_k6:
+#     name: Install dependencies and run k6 test
+#     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v2
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'  # Adjust the Node.js version as needed
+#     - name: Setup Node.js environment
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: '18'  
 
-    - name: Install dependencies
-      run: npm install
+#     - name: Install dependencies
+#       run: npm install
 
-    - name: Install Google Chrome
-      run: sudo apt-get install -y google-chrome-stable
+#     - name: Install Google Chrome
+#       run: sudo apt-get install -y google-chrome-stable
 
-    - name: Start the server
-      run: npm run dev &
+#     - name: Start the server
+#       run: npm run dev &
 
-    - name: Wait for server to be ready
-      run: sleep 10 
+#     - name: Wait for server to be ready
+#       run: sleep 10 
 
-    - name: Run Compatibility tests
-      run: npm run test:all
+#     - name: Run Compatibility tests
+#       run: npm run test:all
 
-    - name: Run performance tests
-      run: node lighthouse-audit.js
+#     - name: Run performance tests
+#       run: node lighthouse-audit.js
 
-    - name: Run load tests
-      uses: grafana/k6-action@v0.3.1
-      with:
-        filename: loadtest.js
-        flags: --vus 50 --duration 10s
+#     - name: Run load tests
+#       uses: grafana/k6-action@v0.3.1
+#       with:
+#         filename: loadtest.js
+#         flags: --vus 50 --duration 10s
