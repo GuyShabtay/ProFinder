@@ -22,7 +22,7 @@ const SearchBar = ({ onSearch }) => {
     <form onSubmit={handleSubmit} className="search-bar">
       <input
         type="text"
-        placeholder="Search by Name, Profession, or Location"
+        placeholder="Search by Name, Profession or Location"
         value={searchTerm}
         onChange={handleChange}
         className="search-input"

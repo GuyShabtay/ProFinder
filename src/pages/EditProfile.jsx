@@ -16,7 +16,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:5555/profiles/${id}`)
+    axios.get(`https://profinder-backend.onrender.com/profiles/${id}`)
     .then((response) => {
         setProfession(response.data.profession);
         setLocation(response.data.location)
@@ -37,7 +37,7 @@ const EditProfile = () => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/profiles/${id}`, data)
+      .put(`https://profinder-backend.onrender.com/profiles/${id}`, data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Profile Edited successfully', { variant: 'success' });

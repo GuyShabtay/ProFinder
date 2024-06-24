@@ -36,7 +36,7 @@ const ShowProfile = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/profiles/${id}`)
+      .get(`https://profinder-backend.onrender.com/profiles/${id}`)
       .then((response) => {
         setProfile(response.data);
         setLoading(false);
@@ -52,7 +52,7 @@ const ShowProfile = () => {
 
   const checkIsProfileViewRated = () => {
     axios
-      .put(`http://localhost:5555/profiles/statistics/profile-viewRating/user`, {email})
+      .put(`https://profinder-backend.onrender.com/profiles/statistics/profile-viewRating/user`, {email})
       .then((response) => {
         if(response.data.message==='true')
          { 
@@ -93,13 +93,10 @@ const ShowProfile = () => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/profiles/comment/${id}`, newCommentUser)
+      .put(`https://profinder-backend.onrender.com/profiles/comment/${id}`, newCommentUser)
       .then(() => {
         setLoading(false);
         window.location.reload();
-        
-
-
       })
       .catch((error) => {
         setLoading(false);
@@ -114,7 +111,7 @@ const ShowProfile = () => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/profiles/rating/${id}`, newRatedUser)
+      .put(`https://profinder-backend.onrender.com/profiles/rating/${id}`, newRatedUser)
       .then(() => {
         setLoading(false);
         // enqueueSnackbar('Profile Edited successfully', { variant: 'success' });
@@ -129,7 +126,7 @@ const ShowProfile = () => {
 
   const addCommentToStatistics = () => {
     const response=axios
-      .post(`http://localhost:5555/profiles/statistics/comments`, {email:email})
+      .post(`https://profinder-backend.onrender.com/profiles/statistics/comments`, {email:email})
       .then(() => {
         console.log(response.data)
       })
@@ -139,7 +136,7 @@ const ShowProfile = () => {
   };
   const addRatingToStatistics = () => {
     const response=axios
-      .post(`http://localhost:5555/profiles/statistics/ratings`, {email:email})
+      .post(`https://profinder-backend.onrender.com/profiles/statistics/ratings`, {email:email})
       .then(() => {
         ///console.log(response.data)
       })
@@ -156,13 +153,17 @@ const ShowProfile = () => {
   };
 
   const handleAddComment = () => {
-    if (newComment.trim() !== '') {
+    if (newComment.trim() !== '' && email) {
       setComments([...comments, newComment]);
       setNewComment('');
       saveComment();
     }
     else if(!email){
           enqueueSnackbar('Only registered users can rate', { variant: 'error' });
+          return;
+    }
+    else if(newComment.trim() === ''){
+          enqueueSnackbar('Comment can not be empty', { variant: 'error' });
           return;
     }
   };
@@ -264,13 +265,13 @@ const getUserRating = () => {
             </div>
           ))
         ) : (
-          console.log('there are no new comments yet')
+          console.log('')
         )}
        
       </div>
-      {showModal && (
+      {/*showModal && (
         <RateUserModal ratingSubject={'profile-view'} onClose={() => setShowModal(false)} />
-      )}
+      )*/}
     </div>
   );
 };

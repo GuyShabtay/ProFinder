@@ -17,7 +17,7 @@ const BottomNavbar = ({ profiles }) => {
     const interval = setInterval(() => {
       setCurrentProfileIndex(currentIndex);
       currentIndex = (currentIndex + 1) % sortedProfiles.length;
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [profiles]);
