@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import RateUserModal from '../components/RateUserModal'
 import axios from 'axios';
-//comment
+
 const Navbar = () => {
   const location = useLocation();
   const isLoggedIn = location.pathname !== "/LoginPage"; 
@@ -27,7 +27,7 @@ const Navbar = () => {
 
   const checkIsOverallRated = () => {
     axios
-      .put(`http://localhost:5555/profiles/statistics/overallRating/user`, {email})
+      .put(`https://profinder-backend.onrender.com/profiles/statistics/overallRating/user`, {email})
       .then((response) => {
         if(response.data.message==='true')
           setIsOverallRated(true)

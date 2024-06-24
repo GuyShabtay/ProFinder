@@ -19,39 +19,21 @@ function LoginPage() {
   axios.defaults.withCredentials=true;
 
   
-  const checkIsLoginRated = async () => {
-    setTimeout(async () => {
-      try {
-        const response = await axios.put(`http://localhost:5555/profiles/statistics/loginRating/user`, { email });
-        console.log('response', response);
-        return response.data.message === 'true';
-      } catch (error) {
-        console.log(error);
-        return false;
-      }
-         
-        }, 5000);
-  };
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     try {
-      const result = await axios.post("http://localhost:5555/profiles/login", { email, password });
+      const result = await axios.post("https://profinder-backend.onrender.com/profiles/login", { email, password });
   
       if (result.data.message === "Success") {
         localStorage.setItem('token', result.data.token);
         localStorage.setItem('name', result.data.username);
         localStorage.setItem('email', result.data.email);
         localStorage.setItem('color', result.data.color);
-  
-        const isLoginRated = await checkIsLoginRated();
-        
-        if (showModal === 0 && !isLoginRated) {
-          setShowModal(prevShowModal => prevShowModal + 1);
-        } else {
+          
+       
           navigate("/", { state: { name: result.data.username } });
-        }
+        
       } else {
         navigate("/register");
         alert("You are not registered to this service");

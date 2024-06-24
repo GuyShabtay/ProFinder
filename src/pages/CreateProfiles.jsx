@@ -25,7 +25,7 @@ const CreateProfiles = () => {
     };
     setLoading(true);
     axios
-      .post('http://localhost:5555/profiles', data)
+      .post('https://profinder-backend.onrender.com/profiles', data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Profile Created successfully', { variant: 'success' });
@@ -40,7 +40,7 @@ const CreateProfiles = () => {
 
   const addProfileToStatistics = () => {
     const response=axios
-      .post(`http://localhost:5555/profiles/statistics/profilesToUsersRatio`)
+      .post(`https://profinder-backend.onrender.com/profiles/statistics/profilesToUsersRatio`)
       .then(() => {
         ///console.log(response.data)
       })

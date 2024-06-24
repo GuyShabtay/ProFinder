@@ -15,7 +15,7 @@ const ProfilesTable = ({ profiles }) => {
   const searchOption = 'email';
 
   useEffect(() => {
-    axios.get(`http://localhost:5555/profiles?q=${searchTerm}&option=${searchOption}`)
+    axios.get(`https://profinder-backend.onrender.com/profiles?q=${searchTerm}&option=${searchOption}`)
       .then((response) => {
         setProfilesOfUser(response.data.data);
       })

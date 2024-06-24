@@ -22,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:5555/profiles')
+      .get('https://profinder-backend.onrender.com/profiles')
       .then((response) => {
         setProfiles(response.data.data);
         setLoading(false);
@@ -36,7 +36,7 @@ const Home = () => {
   const handleSearch = (searchTerm, searchOption) => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/profiles?q=${searchTerm}&option=${searchOption}`)
+      .get(`https://profinder-backend.onrender.com/profiles?q=${searchTerm}&option=${searchOption}`)
       .then((response) => {
         setProfiles(response.data.data);
         setLoading(false);

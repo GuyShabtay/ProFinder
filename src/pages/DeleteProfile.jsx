@@ -14,7 +14,7 @@ const DeleteProfile = () => {
   const handleDeleteProfile = () => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5555/profiles/${id}`)
+      .delete(`https://profinder-backend.onrender.com/profiles/${id}`)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Profile Deleted successfully', { variant: 'success' });

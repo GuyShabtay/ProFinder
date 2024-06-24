@@ -19,7 +19,7 @@ function RegisterPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:5555/profiles/register", { name, email, phone, password,color })
+        axios.post("https://profinder-backend.onrender.com/profiles/register", { name, email, phone, password,color })
         .then(result => {
             console.log(result);
             navigate("/LoginPage");
@@ -43,7 +43,7 @@ function RegisterPage() {
 
       const addUserToStatistics = () => {
         const response=axios
-          .post(`http://localhost:5555/profiles/statistics/profilesToUsersRatio`)
+          .post(`https://profinder-backend.onrender.com/profiles/statistics/profilesToUsersRatio`)
           .then(() => {
             ///console.log(response.data)
           })

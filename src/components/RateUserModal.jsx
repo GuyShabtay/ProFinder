@@ -16,6 +16,7 @@ import './RateUserModal.css';
 const RateUserModal = ({ ratingSubject,onClose }) => {
   const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [isThankYouMessage, SetIsThankYouMessage] = useState(false);
   const email=localStorage.getItem('email')
   const { enqueueSnackbar } = useSnackbar();
 
@@ -28,10 +29,11 @@ const RateUserModal = ({ ratingSubject,onClose }) => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/profiles/statistics/${ratingSubject}Rating`, newRatedUser)
+      .put(`https://profinder-backend.onrender.com/profiles/statistics/${ratingSubject}Rating`, newRatedUser)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('Profile Edited successfully', { variant: 'success' });
+        SetIsThankYouMessage(true)
+        // enqueueSnackbar('Profile Edited successfully', { variant: 'success' });
       })
       .catch((error) => {
         setLoading(false);
@@ -42,16 +44,17 @@ const RateUserModal = ({ ratingSubject,onClose }) => {
 
   const handleSubmit = () => {
     if (rating !== 0) {
-      if(!email)
-    {
-      enqueueSnackbar('Only registered users can rate', { variant: 'error' });
-      return;
-    }
+      if (!email) {
+        enqueueSnackbar('Only registered users can rate', { variant: 'error' });
+        return;
+      }
       saveRating();
-      window.location.reload();
-
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000); 
     }
   };
+  
 
   return (
     
@@ -84,12 +87,19 @@ const RateUserModal = ({ ratingSubject,onClose }) => {
         />
         
         <div className='flex-column-center'>
-        <h1>Thank you for using our website!</h1>
-        <h2>We would appreciate it if you could rate </h2>
-        <h2>your {ratingSubject} experience</h2>
-        <StarRating rating={rating} setRating={setRating} />
-        <button className='submit-btn' onClick={handleSubmit}>Submit</button>
-        </div>        
+        {!isThankYouMessage ? (
+          <>
+            <h1>Thank you for using our website!</h1>
+            <h2>We would appreciate it if you could rate</h2>
+            <h2>your {ratingSubject} experience</h2>
+            <StarRating rating={rating} setRating={setRating} />
+            <button className='submit-btn' onClick={handleSubmit}>Submit</button>
+          </>
+        ):(
+        <h1>Thank you!</h1>
+        )}
+      </div>
+             
       </div>
     </div>
   );
