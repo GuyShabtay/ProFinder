@@ -57,7 +57,7 @@ function RegisterPage() {
         <Navbar/>
         <div className="signup-container">
             <div className="signup-form">
-                <h2>Sign Up</h2>
+                <h2>Register</h2>
                 <form onSubmit={ handleSubmit }>
                     <div className="mb-3">
                         <label htmlFor="name"><strong>Name</strong></label>
@@ -95,7 +95,7 @@ function RegisterPage() {
                             required
                         />
                     </div>
-                    <button type="submit" className="btn btn-success">Sign Up</button>
+                    <button type="submit" className="btn btn-success">Register</button>
                 </form>
                 <p>Already have an account?</p>
                 <Link to="/LoginPage" className="btn btn-light border">Login</Link>
