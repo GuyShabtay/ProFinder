@@ -16,7 +16,7 @@ const LoadingModal = () => {
       }}
     >
       <div
-        className='w-[600px] max-w-full h-[400px] bg-white rounded-xl p-4 flex flex-col  relative'
+        className='w-[700px] max-w-full h-[400px] bg-white rounded-xl p-4 flex flex-col  relative'
         style={{
           boxShadow: '0px 0px 20px 2px rgba(0, 0, 0, 0.2)',
           border: '2px solid #2596be',
