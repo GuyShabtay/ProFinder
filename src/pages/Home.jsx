@@ -21,9 +21,10 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-
+    setLoadingModal(true)
     setTimeout(() => {
       if (loading) setLoadingModal(true);
+      if (ProfilesTable.length<2) setLoadingModal(true);
     }, 3000);
 
     axios
