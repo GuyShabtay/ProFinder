@@ -80,7 +80,7 @@ function LoginPage() {
             <button type="submit" className="btn btn-success">Login</button>
           </form>
           <p>Don't have an account?</p>
-          <Link to="/RegisterPage" className="btn btn-light border">Sign Up</Link>
+          <Link to="/RegisterPage" className="btn btn-light border">Register</Link>
         </div>
       </div>
       {/*showModal && (
