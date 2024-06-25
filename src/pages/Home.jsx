@@ -18,26 +18,36 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [loadingModal, setLoadingModal] = useState(false);
   const [showType, setShowType] = useState('table');
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(prevSeconds => prevSeconds + 1);
+    }, 1000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
-    setLoadingModal(true)
-    setTimeout(() => {
-      if (loading) setLoadingModal(true);
-      if (ProfilesTable.length<2) setLoadingModal(true);
-    }, 3000);
+    // setLoadingModal(true)
+    // setTimeout(() => {
+    //   if (loading) setLoadingModal(true);
+    //   if (ProfilesTable.length<2) setLoadingModal(true);
+    // }, 3000);
 
     axios
       .get('https://profinder-backend.onrender.com/profiles')
       .then((response) => {
         setProfiles(response.data.data);
         setLoading(false);
-        setLoadingModal(false);
+        // setLoadingModal(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setLoadingModal(false);
+        // setLoadingModal(false);
       });
   }, []);
 
@@ -97,7 +107,7 @@ const Home = () => {
         <ProfilesCard profiles={profiles} />
       )}
       <BottomNavbar profiles={profiles} />
-      {loadingModal && <LoadingModal />}
+      {loading && seconds>3 && <LoadingModal />}
     </div>
   );
 };
