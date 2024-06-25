@@ -8,7 +8,7 @@ import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import ProfilesTable from '../components/home/ProfilesTable';
 import ProfilesCard from '../components/home/ProfilesCard';
 import BottomNavbar from '../components/home/BottomNavbar';
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
 import LoadingModal from '../components/LoadingModal';
 import './Home.css';
@@ -19,16 +19,13 @@ const Home = () => {
   const [loadingModal, setLoadingModal] = useState(false);
   const [showType, setShowType] = useState('table');
 
-  
-  
   useEffect(() => {
     setLoading(true);
-    if (ProfilesTable.length<2)
-      {
-        setTimeout(() => {
-          setLoadingModal(true);   
-  }, 3000);
-      }
+
+    setTimeout(() => {
+      if (ProfilesTable.length < 2) setLoadingModal(true);
+    }, 3000);
+
     axios
       .get('https://profinder-backend.onrender.com/profiles')
       .then((response) => {
@@ -40,14 +37,15 @@ const Home = () => {
         console.log(error);
         setLoading(false);
         setLoadingModal(false);
-
       });
   }, []);
-  
+
   const handleSearch = (searchTerm, searchOption) => {
     setLoading(true);
     axios
-      .get(`https://profinder-backend.onrender.com/profiles?q=${searchTerm}&option=${searchOption}`)
+      .get(
+        `https://profinder-backend.onrender.com/profiles?q=${searchTerm}&option=${searchOption}`
+      )
       .then((response) => {
         setProfiles(response.data.data);
         setLoading(false);
@@ -56,44 +54,40 @@ const Home = () => {
         console.log(error);
         setLoading(false);
       });
-};
+  };
 
   return (
     <div className='main-background-image'>
-    <Navbar/>
-    <div
-    className='flex justify-center items-center header-background-image'
-    >
-    <h1 className='text-white text-4xl my-8 font-bold '>
-    <span className="text-shadow">Find Pros, Get It Done</span>
-    </h1>
-    </div>
-    <SearchBar onSearch={handleSearch} /> 
+      <Navbar />
+      <div className='flex justify-center items-center header-background-image'>
+        <h1 className='text-white text-4xl my-8 font-bold '>
+          <span className='text-shadow'>Find Pros, Get It Done</span>
+        </h1>
+      </div>
+      <SearchBar onSearch={handleSearch} />
 
+      <div className='toggle-container'>
+        <button
+          className={`toggle-button ${showType === 'table' ? 'active' : ''}`}
+          onClick={() => setShowType('table')}
+        >
+          Table
+        </button>
+        <button
+          className={`toggle-button ${showType === 'card' ? 'active' : ''}`}
+          onClick={() => setShowType('card')}
+        >
+          Cards
+        </button>
+      </div>
+      {localStorage.getItem('name') && (
+        <div style={{ display: 'inline-block', position: 'relative' }}>
+          <Link to='/profiles/create'>
+            <MdOutlineAddBox className='text-sky-800 text-5xl' />
+          </Link>
+        </div>
+      )}
 
-     <div className='toggle-container'>
-      <button
-        className={`toggle-button ${showType === 'table' ? 'active' : ''}`}
-        onClick={() => setShowType('table')}
-      >
-        Table
-      </button>
-      <button
-        className={`toggle-button ${showType === 'card' ? 'active' : ''}`}
-        onClick={() => setShowType('card')}
-      >
-        Cards
-      </button>
-    </div>
-{ localStorage.getItem('name') &&
-
-    <div style={{ display: 'inline-block', position: 'relative' }}>
-    <Link to='/profiles/create'>
-      <MdOutlineAddBox className='text-sky-800 text-5xl' />
-    </Link>
-  </div>
-}
-  
       {loading ? (
         <Spinner />
       ) : showType === 'table' ? (
@@ -101,10 +95,8 @@ const Home = () => {
       ) : (
         <ProfilesCard profiles={profiles} />
       )}
-      <BottomNavbar profiles={profiles}/>
-      {loadingModal && (
-        <LoadingModal />
-      )}
+      <BottomNavbar profiles={profiles} />
+      {loadingModal && <LoadingModal />}
     </div>
   );
 };
