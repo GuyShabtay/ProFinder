@@ -20,11 +20,12 @@ const LoadingModal = () => {
         style={{
           boxShadow: '0px 0px 20px 2px rgba(0, 0, 0, 0.2)',
           border: '2px solid #2596be',
+          textAlign:'center'
         }}
       >
         <div className='flex-column-center'>
           <h1>Please wait a few seconds...</h1>
-          <h2>(may take a little longer because the server is free)</h2>
+          <h2>(may take a little longer than usual because the server is free)</h2>
         </div>
       </div>
     </div>
