@@ -23,7 +23,7 @@ const Home = () => {
     setLoading(true);
 
     setTimeout(() => {
-      if (ProfilesTable.length < 2) setLoadingModal(true);
+      if (loading) setLoadingModal(true);
     }, 3000);
 
     axios
