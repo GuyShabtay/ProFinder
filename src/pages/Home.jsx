@@ -10,6 +10,7 @@ import ProfilesCard from '../components/home/ProfilesCard';
 import BottomNavbar from '../components/home/BottomNavbar';
 import Navbar from '../components/Navbar'
 import SearchBar from '../components/SearchBar';
+import LoadingModal from '../components/LoadingModal';
 import './Home.css';
 
 const Home = () => {
@@ -91,6 +92,9 @@ const Home = () => {
         <ProfilesCard profiles={profiles} />
       )}
       <BottomNavbar profiles={profiles}/>
+      {ProfilesTable.length<2 && (
+        <LoadingModal />
+      )}
     </div>
   );
 };
