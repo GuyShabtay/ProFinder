@@ -16,21 +16,31 @@ import './Home.css';
 const Home = () => {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingModal, setLoadingModal] = useState(false);
   const [showType, setShowType] = useState('table');
 
   
   
   useEffect(() => {
     setLoading(true);
+    if (ProfilesTable.length<2)
+      {
+        setTimeout(() => {
+          setLoadingModal(true);   
+  }, 3000);
+      }
     axios
       .get('https://profinder-backend.onrender.com/profiles')
       .then((response) => {
         setProfiles(response.data.data);
         setLoading(false);
+        setLoadingModal(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
+        setLoadingModal(false);
+
       });
   }, []);
   
@@ -92,7 +102,7 @@ const Home = () => {
         <ProfilesCard profiles={profiles} />
       )}
       <BottomNavbar profiles={profiles}/>
-      {ProfilesTable.length<2 && (
+      {loadingModal && (
         <LoadingModal />
       )}
     </div>
