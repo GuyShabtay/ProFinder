@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Spinner from '../components/Spinner';
 import { Link } from 'react-router-dom';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineAddBox } from 'react-icons/md';
 import ProfilesTable from '../components/home/ProfilesTable';
 import ProfilesCard from '../components/home/ProfilesCard';
 import BottomNavbar from '../components/home/BottomNavbar';
@@ -16,7 +14,6 @@ import './Home.css';
 const Home = () => {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loadingModal, setLoadingModal] = useState(false);
   const [showType, setShowType] = useState('table');
   const [seconds, setSeconds] = useState(0);
 
@@ -24,30 +21,20 @@ const Home = () => {
     const interval = setInterval(() => {
       setSeconds(prevSeconds => prevSeconds + 1);
     }, 1000);
-
-    // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
     setLoading(true);
-    // setLoadingModal(true)
-    // setTimeout(() => {
-    //   if (loading) setLoadingModal(true);
-    //   if (ProfilesTable.length<2) setLoadingModal(true);
-    // }, 3000);
-
     axios
       .get('https://profinder-backend.onrender.com/profiles')
       .then((response) => {
         setProfiles(response.data.data);
         setLoading(false);
-        // setLoadingModal(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        // setLoadingModal(false);
       });
   }, []);
 
