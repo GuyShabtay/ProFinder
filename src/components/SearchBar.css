@@ -39,5 +39,6 @@ button.search-button {
   }
   .search-input {
     width: 330px; 
+    margin-bottom: 10px;
   }
 }
