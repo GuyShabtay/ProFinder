@@ -212,7 +212,7 @@ const getUserRating = () => {
           </div>
           <div className='text-xl mr-4 text-gray-500 flex items-center'>
           {!getUserRating() ?(
-            <div style={{ display: 'flex' }}>
+            <div className="rate" style={{ display: 'flex' }}>
             <span className='mr-3'>Rate this professional:</span>
               <StarRating rating={rating} setRating={setRating} />
               <button className='submit-btn' onClick={() => { handleSubmit(); addRatingToStatistics(); }}>
