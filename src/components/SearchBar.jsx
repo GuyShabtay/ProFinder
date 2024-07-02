@@ -27,6 +27,7 @@ const SearchBar = ({ onSearch }) => {
         onChange={handleChange}
         className="search-input"
       />
+      <div className='search-buttons'>
       <select
         value={searchOption}
         onChange={handleOptionChange}
@@ -39,6 +40,7 @@ const SearchBar = ({ onSearch }) => {
       <button type="submit" className="search-button">
         Search
       </button>
+      </div>
     </form>
   );
 };
