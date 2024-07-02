@@ -48,3 +48,8 @@
   .navbar-center{
     margin-right: 90px;
   }
+  @media (max-width: 768px) {
+    .navbar-right button {
+      margin-top: 3px;
+    }
+  }
