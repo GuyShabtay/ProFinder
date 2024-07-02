@@ -33,3 +33,11 @@ button.search-button {
 .search-button:hover {
   background-color: #0056b3;
 }
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+  }
+  .search-input {
+    width: 330px; 
+  }
+}
