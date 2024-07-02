@@ -70,7 +70,7 @@
   }
   @media (max-width: 768px) {
     textarea {
-      max-width: 50px; 
+      max-width: 250px; 
     } 
   }
   
